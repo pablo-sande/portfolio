@@ -1,0 +1,70 @@
+---
+import Footer from '../components/Footer.astro'
+import Header from '../components/Header.astro'
+interface Props {
+    title: string
+}
+
+const { title } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Anta&display=swap"
+            rel="stylesheet"
+        />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
+    </head>
+    <body class="anta-regular">
+        <div
+            class="blur-sm bg-[url('/home-background.png')] fixed w-full h-full top-0"
+        >
+        </div>
+        <div class="flex flex-col h-screen justify-between pt-28">
+            <Header />
+            <slot />
+            <Footer />
+        </div>
+    </body>
+</html>
+
+<style>
+    .anta-regular {
+        font-family: 'Anta', sans-serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+</style>
+
+<script>
+    const header = document.getElementById('header')
+    document.addEventListener('scroll', (event: Event) => {
+        console.log('asdfñlkjdsf ', window.scrollY, header?.clientHeight)
+        if (header && window.scrollY > header?.clientHeight / 2) {
+            header.classList.add(
+                'bg-slate-900',
+                'shadow-lg',
+                'shadow-gray-500',
+                'h-24'
+            )
+            header.classList.remove('h-28')
+        } else {
+            header?.classList.add('h-28')
+            header?.classList.remove(
+                'bg-slate-900',
+                'shadow-lg',
+                'shadow-gray-500',
+                'h-24'
+            )
+        }
+    })
+</script>

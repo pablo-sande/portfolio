@@ -1,0 +1,102 @@
+---
+import type { SkillCardItem } from '../data/types'
+
+interface Props {
+    item: SkillCardItem
+}
+
+const { item } = Astro.props as Props
+
+const MAX_ROTATION_RADIUS = 270
+const MAX_ANIMATION_DURATION = 1
+
+const getBorderColor = (offset: number) => {
+    return item.skillLevel > offset ? borderColor : 'transparent'
+}
+const borderColor = '#830b08'
+const borderRightColor = getBorderColor(25)
+const borderBottomColor = getBorderColor(65)
+const borderLeftColor = getBorderColor(99)
+const borderRotationDegrees =
+    (item.skillLevel * MAX_ROTATION_RADIUS) / 100 + 'deg'
+const animationDuration = (item.skillLevel * MAX_ANIMATION_DURATION) / 100 + 's'
+---
+
+<div
+    class="p-[12px] rounded-full skillbox spin relative h-[150px] w-[150px] m-auto"
+>
+    <div
+        class="bg-gray-200 relative rounded-full flex flex-col justify-center items-center w-full h-full"
+    >
+        <div class="w-16 h-16">
+            <Fragment set:html={item.thumbnail} />
+        </div>
+        <h2 class="font-bold text-lg text-gray-800 text-center">
+            {item.title}
+        </h2>
+    </div>
+</div>
+
+<style
+    lang="scss"
+    define:vars={{
+        borderBottomColor,
+        borderLeftColor,
+        borderRightColor,
+        borderRotationDegrees,
+        animationDuration,
+        borderColor,
+    }}
+>
+    .skillbox {
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 9999px;
+        }
+    }
+
+    .spin {
+        &:hover {
+            color: var(--borderColor);
+        }
+
+        &::before,
+        &::after {
+            top: 0;
+            left: 0;
+        }
+
+        &::before {
+            border: 12px solid transparent;
+        }
+
+        &:hover::before {
+            border-top-color: var(--borderColor); // Show borders
+            border-right-color: var(--borderRightColor);
+            border-bottom-color: var(--borderBottomColor);
+            border-left-color: var(--borderLeftColor);
+
+            transition:
+                border-top-color 0s linear 0s,
+                border-right-color 0s linear 0.3s,
+                border-bottom-color 0s linear 0.65s,
+                border-left-color 0s linear 1s;
+        }
+
+        &::after {
+            border: 0 solid transparent;
+        }
+
+        &:hover::after {
+            border-top: 12px solid var(--borderColor);
+            border-left-width: 12px;
+            border-right-width: 12px;
+            transform: rotate(var(--borderRotationDegrees));
+            transition: transform var(--animationDuration) linear 0s;
+        }
+    }
+</style>
