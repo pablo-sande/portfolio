@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: portfolio
-        image: portfolio:v1
+        image: ghcr.io/pablo-sande/portfolio:main
         resources:
           requests:
             cpu: "100m"
@@ -25,6 +25,8 @@ spec:
             cpu: 500m
             # -- maximum amout of memory per container
             memory: 512Mi
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
