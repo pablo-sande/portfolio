@@ -50,6 +50,6 @@ jobs:
             - name: Save DigitalOcean kubeconfig with short-lived credentials
               run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 pablosande-cluster
             - name: Deploy to DigitalOcean Kubernetes
-              run: make update
+              run: kubectl rollout restart deployment/portfolio -n portfolio
             - name: Verify deployment
               run: kubectl rollout status deployment/portfolio -n portfolio
