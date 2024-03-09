@@ -17,6 +17,10 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v4
 
+            - name: Extract version and set it to TAG env var
+              run: |
+                  echo "TAG=$(jq -r '.version' package.json)" >> $GITHUB_ENV
+
             - name: Log in to the Container registry
               uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
               with:
@@ -60,6 +64,6 @@ jobs:
             - name: Save DigitalOcean kubeconfig with short-lived credentials
               run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 pablosande-cluster
             - name: Deploy to DigitalOcean Kubernetes
-              run: kubectl rollout restart deployment/portfolio -n default
+              run: kubectl rollout restart deployment/portfolio-deployment -n default
             - name: Verify deployment
-              run: kubectl rollout status deployment/portfolio -n default
+              run: kubectl rollout status deployment/portfolio-deployment -n default

@@ -5,6 +5,8 @@ import client from '../lib/apollo-client'
 import graph from 'graphql-tag'
 import type { SkillCardItem } from '../data/types'
 
+export const prerender = false
+
 const { data, loading } = await client.query({
     query: graph`
         query SkillLevels {

@@ -3,6 +3,8 @@ import { createYoga, createSchema } from 'graphql-yoga';
 
 import SkillLevels from '../../data/skills';
 
+export const prerender = false
+
 const schema = createSchema({
   typeDefs: `
     type SkillItem {

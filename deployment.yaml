@@ -5,7 +5,7 @@ metadata:
   labels:
     app: portfolio
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: portfolio
@@ -16,13 +16,13 @@ spec:
     spec:
       containers:
       - name: portfolio
-        image: ghcr.io/pablo-sande/portfolio
+        image: ghcr.io/pablo-sande/portfolio:main
         resources:
           requests:
-            cpu: "100m"
+            cpu: "50m"
           limits:
             # -- maximum amout of cpu per container (250m means 25% of 1 core)
-            cpu: 500m
+            cpu: 100m
             # -- maximum amout of memory per container
             memory: 512Mi
         imagePullPolicy: IfNotPresent

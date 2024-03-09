@@ -1,22 +1,12 @@
-# Use an existing node image as base image
-FROM node:18-alpine
-
-# Set the working directory in the container
+FROM node:lts AS runtime
 WORKDIR /app
-
-# Copy package.json and package-lock.json to the container
-COPY package*.json ./
-
+COPY package.json ./
+RUN rm -rf node_modules pnpm-lock.yaml
 RUN npm install -g pnpm
-
-# Install required packages
-RUN pnpm install
-
-# Copy all files to the container
+RUN pnpm i
 COPY . .
-
-# Expose port 3000
+RUN pnpm run build
+ENV HOST=0.0.0.0
+ENV PORT=3000
 EXPOSE 3000
-
-# Start the application
-CMD [ "pnpm", "start" ]
+CMD node ./dist/server/entry.mjs
