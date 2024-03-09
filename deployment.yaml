@@ -16,13 +16,13 @@ spec:
     spec:
       containers:
       - name: portfolio
-        image: ghcr.io/pablo-sande/portfolio:main
+        image: ghcr.io/pablo-sande/portfolio:sha-79a839e
         resources:
           requests:
-            cpu: "50m"
+            cpu: "500m"
           limits:
             # -- maximum amout of cpu per container (250m means 25% of 1 core)
-            cpu: 100m
+            cpu: 500m
             # -- maximum amout of memory per container
             memory: 512Mi
         imagePullPolicy: IfNotPresent
