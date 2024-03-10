@@ -26,7 +26,7 @@ const { title } = Astro.props
     </head>
     <body class="anta-regular">
         <div
-            class="blur-sm bg-[url('/home-background.png')] fixed w-full h-full top-0"
+            class="blur-sm bg-[url('/home-background.png')] bg-cover bg-norepeat fixed w-full h-full top-0"
         >
         </div>
         <div class="flex flex-col h-screen justify-between pt-28">
@@ -49,14 +49,14 @@ const { title } = Astro.props
     const header = document.getElementById('header')
     document.addEventListener('scroll', (event: Event) => {
         console.log('asdfñlkjdsf ', window.scrollY, header?.clientHeight)
-        if (header && window.scrollY > header?.clientHeight / 2) {
-            header.classList.add(
+        if (window.scrollY) {
+            header?.classList.add(
                 'bg-slate-900',
                 'shadow-lg',
                 'shadow-gray-500',
                 'h-24'
             )
-            header.classList.remove('h-28')
+            header?.classList.remove('h-28')
         } else {
             header?.classList.add('h-28')
             header?.classList.remove(

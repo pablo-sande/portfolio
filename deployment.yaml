@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: portfolio
-        image: ghcr.io/pablo-sande/portfolio:sha-79a839e
+        image: ghcr.io/pablo-sande/portfolio:main-0.0.1
         resources:
           requests:
             cpu: "500m"

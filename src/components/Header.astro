@@ -6,7 +6,10 @@ import { MobileHeader } from './MobileHeader'
     id="header"
     class="flex items-center flex-row justify-between h-28 w-full p-8 z-10 top-0 fixed transition-all duration-500"
 >
-    <a href="/" class="text-4xl font-bold text-white">Pablo Sande</a>
+    <div class="flex">
+        <a href="/" class="type-in text-4xl font-bold text-white">Pablo Sande</a
+        >
+    </div>
 
     <div class="lg:flex items-center space-x-4 hidden">
         <a href="/about" class="text-white hover:text-blue-400">About me</a>
@@ -22,3 +25,34 @@ import { MobileHeader } from './MobileHeader'
         <MobileHeader client:visible />
     </div>
 </div>
+
+<style lang="scss">
+    .type-in {
+        overflow: hidden;
+        border-right: 0.1em solid white;
+        white-space: nowrap;
+        margin: 0 auto;
+        animation:
+            typing 2s steps(20, end),
+            blink-caret 1s step-end infinite;
+    }
+
+    @keyframes typing {
+        from {
+            width: 0;
+        }
+        to {
+            width: 100%;
+        }
+    }
+
+    @keyframes blink-caret {
+        from,
+        to {
+            border-color: transparent;
+        }
+        50% {
+            border-color: white;
+        }
+    }
+</style>
