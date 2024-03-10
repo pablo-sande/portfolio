@@ -1,4 +1,5 @@
 ---
+import Footer from '../components/Footer.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
@@ -10,7 +11,7 @@ import Layout from '../layouts/Layout.astro'
             class="-rotate-45 launch fixed left-0 right-0 ml-auto mr-auto"
         ></object>
         <div
-            class="flex fixed launch-section items-center flex-col text-white p-5 z-200 max-w-screen overflow-x-hidden overflow-y-auto left-0 right-0 ml-auto mr-auto"
+            class="h-scren flex launch-section items-center flex-col text-white p-5 z-200 max-w-screen md:max-w-lg overflow-x-hidden overflow-y-auto left-0 right-0 ml-auto mr-auto"
         >
             <img
                 src="/pablo.png"
@@ -31,6 +32,11 @@ import Layout from '../layouts/Layout.astro'
                     Architect
                 </h1>
             </div>
+            <p class="text-white text-lg show-up pt-8">
+                Hey! I'm Pablo, a Frontend Architect with 10 years of
+                experience. Please feel free to navigate through this portfolio
+                if you want to know me a bit better :)
+            </p>
         </div>
     </main>
 </Layout>
@@ -40,53 +46,50 @@ import Layout from '../layouts/Layout.astro'
         width: 20rem;
         height: 20rem;
         animation: launch 3.5s linear 1s forwards;
-        top: -100%;
-        margin-top: -3.5rem;
+        margin-top: -150vh;
     }
 
     @keyframes launch {
         0% {
-            top: 100%;
+            margin-top: 100vh;
         }
         25% {
-            top: 35%;
+            margin-top: 35vh;
         }
         50% {
-            top: 20%;
+            margin-top: 20vh;
         }
         100% {
-            top: -100%;
+            margin-top: -150vh;
         }
     }
 
     .launch-section {
-        max-height: calc(100vh - 14rem);
         animation: launchsection 3.5s linear 1s forwards;
-        // jumpout 1.5s ease-in 2.5s;
-        top: 100%;
-        transform: translate(0, 0);
+        margin-top: 100vh;
+        padding-top: 4.6rem;
     }
 
     @keyframes launchsection {
         0% {
-            top: 100%;
-            transform: translate(0, 0);
+            margin-top: 100vh;
+            padding-top: 4.6rem;
         }
         25% {
-            top: 35%;
-            transform: translate(0, 0);
+            margin-top: 35vh;
+            padding-top: 4.6rem;
         }
         50% {
-            top: 20%;
-            transform: translate(0, 0);
+            margin-top: 20vh;
+            padding-top: 4.6rem;
         }
         70% {
-            top: 20%;
-            transform: translate(0, 0);
+            margin-top: 20vh;
+            padding-top: 4.6rem;
         }
         100% {
-            top: 50%;
-            transform: translate(0, -50%);
+            margin-top: 0;
+            padding-top: 2rem;
         }
     }
 
@@ -100,7 +103,7 @@ import Layout from '../layouts/Layout.astro'
 
     .show-up {
         opacity: 0;
-        animation: showup 0s linear 6s forwards;
+        animation: showup 1s linear 8s forwards;
     }
 
     @keyframes showup {
@@ -201,5 +204,9 @@ import Layout from '../layouts/Layout.astro'
 </style>
 
 <script>
-    document.addEventListener
+    setTimeout(() => {
+        document
+            .getElementById('main-wrapper')
+            ?.classList.remove('overflow-hidden')
+    }, 8000)
 </script>
