@@ -1,5 +1,6 @@
 ---
 import Footer from '../components/Footer.astro'
+import Project from '../components/Project.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
@@ -11,7 +12,7 @@ import Layout from '../layouts/Layout.astro'
             class="-rotate-45 launch fixed left-0 right-0 ml-auto mr-auto"
         ></object>
         <div
-            class="h-scren flex launch-section items-center flex-col text-white p-5 z-200 max-w-screen md:max-w-lg overflow-x-hidden overflow-y-auto left-0 right-0 ml-auto mr-auto"
+            class="h-screen flex launch-section items-center flex-col text-white p-5 z-200 max-w-screen md:max-w-lg overflow-x-hidden overflow-y-auto left-0 right-0 ml-auto mr-auto"
         >
             <img
                 src="/pablo.png"
@@ -38,6 +39,10 @@ import Layout from '../layouts/Layout.astro'
                 if you want to know me a bit better :)
             </p>
         </div>
+
+        <!-- <div class="flex relative h-screen w-full h-96 bg-[rgb(0 0 3);]">
+            <Project />
+        </div> -->
     </main>
 </Layout>
 
@@ -204,6 +209,11 @@ import Layout from '../layouts/Layout.astro'
 </style>
 
 <script>
+    window.onload = () =>
+        document
+            .getElementById('main-wrapper')
+            ?.classList.add('overflow-hidden')
+
     setTimeout(() => {
         document
             .getElementById('main-wrapper')

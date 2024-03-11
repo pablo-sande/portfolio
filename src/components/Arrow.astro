@@ -1,0 +1,62 @@
+---
+interface Props {
+    pointerDirection: string
+    arrowDirection: string
+}
+const { pointerDirection, arrowDirection } = Astro.props as Props
+---
+
+<div
+    class:list={[
+        'arrow flex w-px border opacity-80 border-red-400',
+        arrowDirection,
+    ]}
+>
+    <div class:list={['arrow-pointer', pointerDirection]}></div>
+</div>
+
+<style lang="scss">
+    @keyframes arrowexpand {
+        0% {
+            height: 0;
+        }
+        100% {
+            height: 6rem;
+        }
+    }
+    .arrow {
+        animation: 1s arrowexpand linear;
+    }
+    .arrow-pointer {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        border-top: 2px solid rgb(248 113 113);
+        border-right: 2px solid rgb(248 113 113);
+        right: -8px;
+        bottom: 0px;
+    }
+
+    .arrow-pointer-bottom {
+        transform: rotate(133deg) skew(-15deg, -15deg);
+        bottom: 4px;
+    }
+    .arrow-pointer-top {
+        transform: rotate(-45deg) skew(-15deg, -15deg);
+        top: 3px;
+    }
+    .arrow-pointer-top-left {
+        transform: rotate(-90deg) skew(-10deg, -10deg);
+    }
+    .arrow-pointer-top-right {
+        transform: rotate(0) skew(-10deg, -10deg);
+    }
+    .arrow-pointer-bottom-left {
+        transform: rotate(133deg) skew(-10deg, -10deg);
+        right: -7px;
+    }
+    .arrow-pointer-bottom-right {
+        transform: rotate(140deg) skew(-10deg, -10deg);
+        left: -7px;
+    }
+</style>

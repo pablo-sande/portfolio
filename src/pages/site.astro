@@ -1,5 +1,113 @@
 ---
+import Arrow from '../components/Arrow.astro'
+import DiagramCard from '../components/DiagramCard.astro'
 import Layout from '../layouts/Layout.astro'
 ---
 
-<Layout title="site" />
+<Layout title="site">
+    <div
+        class="text-white max-w-screen-lg m-auto p-4 sm:p-6 relative flex flex-col justify-center items-center"
+    >
+        <h2 class="text-4xl py-4">About this site</h2>
+        <p class="p-8">
+            This site is a work in progress. Let me start by telling you that
+            yes, it is over-engineered. I did it for the purpose of showing my
+            understanding of some technologies. It consists of an Hybrid Astro
+            app running on NodeJS. Being in Hybrid mode means that some pages
+            are Static Site Generated while others are Server Side Rendered. The
+            project is Dockerized and deployed in a Kubernetes cluster hosted in
+            DigitalOcean.
+        </p>
+        <a href="" class="my-8">Check it on GitHub</a>
+
+        <div
+            class="flex text-center items-center flex-col p-8 bg-black bg-opacity-75 rounded-lg"
+        >
+            <DiagramCard
+                textLines={[
+                    'React',
+                    'Javascript',
+                    'HTML5',
+                    'CSS, SCSS, Tailwind',
+                ]}
+            />
+            <div
+                class="flex flex-row items-center justify-evenly w-full h-24 overflow-hidden"
+            >
+                <Arrow
+                    pointerDirection="arrow-pointer-bottom"
+                    arrowDirection="rotate-0 h-24"
+                />
+            </div>
+            <div class="flex flex-row justify-center">
+                <DiagramCard textLines={['Hybrid Astro webapp']} />
+            </div>
+            <div
+                class="flex flex-row items-center justify-evenly w-full h-24 overflow-hidden"
+            >
+                <Arrow
+                    pointerDirection="arrow-pointer-bottom-left"
+                    arrowDirection="rotate-45 h-32"
+                />
+                <Arrow
+                    pointerDirection="arrow-pointer-bottom-right"
+                    arrowDirection={'-rotate-45 h-32'}
+                />
+            </div>
+            <div class="flex flex-row">
+                <DiagramCard textLines={['SSR pages']} />
+                <div class="m-auto w-6 md:w-16 bg-red-400 align-center"></div>
+                <DiagramCard textLines={['SSG pages']} />
+            </div>
+            <div
+                class="flex flex-row items-center justify-end w-full h-24 overflow-hidden"
+            >
+                <div class="flex flex-row justify-evenly w-40 md:w-60">
+                    <Arrow
+                        pointerDirection="arrow-pointer-bottom"
+                        arrowDirection="rotate-0 h-24"
+                    />
+                    <Arrow
+                        pointerDirection="arrow-pointer-top"
+                        arrowDirection="rotate-0 h-24"
+                    />
+                </div>
+            </div>
+            <div class="flex flex-row justify-end w-full">
+                <DiagramCard textLines={['GraphQL']} />
+            </div>
+        </div>
+        <Arrow
+            pointerDirection="arrow-pointer-bottom"
+            arrowDirection="rotate-0 h-24"
+        />
+        <div
+            class="flex text-center items-center flex-col p-8 bg-black bg-opacity-75 rounded-lg"
+        >
+            <DiagramCard textLines={['GitHub']} />
+        </div>
+        <Arrow
+            pointerDirection="arrow-pointer-bottom"
+            arrowDirection="rotate-0 h-24"
+        />
+        <div
+            class="flex text-center items-center flex-col p-8 bg-black bg-opacity-75 rounded-lg"
+        >
+            <DiagramCard textLines={['Docker Image']} />
+        </div>
+        <Arrow
+            pointerDirection="arrow-pointer-bottom"
+            arrowDirection="rotate-0 h-24"
+        />
+        <div
+            class="flex text-center items-center flex-col p-8 bg-black bg-opacity-75 rounded-lg"
+        >
+            <DiagramCard textLines={['Kubernetes Cluster']} />
+        </div>
+    </div>
+</Layout>
+
+<style lang="scss">
+    .card {
+    }
+</style>

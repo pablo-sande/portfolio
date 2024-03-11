@@ -44,23 +44,52 @@ jobs:
                   tags: |
                       ${{ steps.meta.outputs.tags }}-${{ env.TAG }}
                   labels: ${{ steps.meta.outputs.labels }}
+    # deploy:
+    #     name: Deploy
+    #     if: github.ref == 'refs/heads/main'
+    #     needs: [build-and-push-image]
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         - name: Checkout repository
+    #           uses: actions/checkout@v4
+    #         - name: Install doctl
+    #           uses: digitalocean/action-doctl@v2
+    #           with:
+    #               token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    #         - name: Save DigitalOcean kubeconfig with short-lived credentials
+    #           run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 pablosande-cluster
+    #         - name: Apply deployment yaml
+    #           run: doctl kubectl apply -f deployment.yaml
+    #         # - name: Deploy to DigitalOcean Kubernetes
+    #         #   run: kubectl rollout restart deployment/portfolio-deployment -n default
+    #         - name: Verify deployment
+    #           run: kubectl rollout status deployment/portfolio-deployment -n default
+
     deploy:
         name: Deploy
         if: github.ref == 'refs/heads/main'
         needs: [build-and-push-image]
-        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                go-version: [1.17.x]
+                os: [ubuntu-latest]
+        runs-on: ${{ matrix.os }}
         steps:
-            - name: Checkout repository
-              uses: actions/checkout@v4
+            - name: Install Go
+              uses: actions/setup-go@v2
+              with:
+                  go-version: ${{ matrix.go-version }}
+            - name: Checkout code
+              uses: actions/checkout@v2
+            - name: Checkout code
+              uses: actions/checkout@v2
             - name: Install doctl
               uses: digitalocean/action-doctl@v2
               with:
                   token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
             - name: Save DigitalOcean kubeconfig with short-lived credentials
-              run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 pablosande-cluster
-            - name: Apply deployment yaml
-              run: doctl kubectl apply -f deployment.yaml
-            # - name: Deploy to DigitalOcean Kubernetes
-            #   run: kubectl rollout restart deployment/portfolio-deployment -n default
+              run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 digital-ocean-kubernetes-cluster-name
+            - name: Deploy to DigitalOcean Kubernetes
+              run: make update
             - name: Verify deployment
-              run: kubectl rollout status deployment/portfolio-deployment -n default
+              run: kubectl rollout status deployment/appname -n appname

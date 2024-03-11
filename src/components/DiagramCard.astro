@@ -1,0 +1,108 @@
+---
+interface Props {
+    textLines: String[]
+}
+const { textLines } = Astro.props as Props
+---
+
+<div
+    class="diagram-card w-40 md:w-60 h-32 bg-cardcolor relative text-white flex items-center flex-col justify-center"
+>
+    {textLines.map((line) => <p>{line}</p>)}
+    <div class="glow-corners top-corners"></div>
+    <div class="glow-corners bottom-corners"></div>
+</div>
+
+<style>
+    .glow-corners.bottom-corners {
+        bottom: 9px;
+    }
+
+    .glow-corners {
+        position: absolute;
+        width: 100%;
+        z-index: 3;
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-perspective: 1000;
+        perspective: 1000;
+    }
+
+    .glow-corners.bottom-corners:before {
+        border-width: 0 0 1px 1px;
+    }
+    .glow-corners:before {
+        left: 0;
+    }
+
+    .glow-corners:before,
+    .glow-corners:after {
+        content: '';
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-color: #00edff;
+        border-style: solid;
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-perspective: 1000;
+        perspective: 1000;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+
+    .glow-corners.bottom-corners:after {
+        border-width: 0 1px 1px 0;
+    }
+    .glow-corners:after {
+        right: 0;
+    }
+    .glow-corners:before,
+    .glow-corners:after {
+        content: '';
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-color: #00edff;
+        border-style: solid;
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-perspective: 1000;
+        perspective: 1000;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    .glow-corners.top-corners {
+        top: 0;
+    }
+    .glow-corners.top-corners:before {
+        border-width: 1px 0 0 1px;
+    }
+    .glow-corners.top-corners:after {
+        border-width: 1px 1px 0 0;
+    }
+
+    .glow-corners:after {
+        right: 0;
+    }
+    .diagram-card:hover .glow-corners:after {
+        right: 10px;
+    }
+    .diagram-card:hover .glow-corners:before {
+        left: 10px;
+    }
+    .diagram-card:hover .glow-corners.top-corners {
+        top: 10px;
+    }
+    .diagram-card:hover .glow-corners.bottom-corners {
+        bottom: 18px;
+    }
+</style>
