@@ -14,14 +14,17 @@ import Layout from '../layouts/Layout.astro'
 </Layout>
 
 <script>
-    window.onload = () =>
+    window.onload = () => {
         document
             .getElementById('main-wrapper')
             ?.classList.add('overflow-hidden')
+        document.getElementById('experience')?.classList.add('hidden')
+    }
 
     setTimeout(() => {
         document
             .getElementById('main-wrapper')
             ?.classList.remove('overflow-hidden')
+        document.getElementById('experience')?.classList.remove('hidden')
     }, 5000)
 </script>
