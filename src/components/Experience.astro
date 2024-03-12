@@ -1,0 +1,80 @@
+---
+const PROJECTS = [
+    {
+        name: 'Betonline',
+        title: 'Website optimization',
+        description:
+            'This site has insane traffic and that requires an excellent performance optimization and 100% uptime. To achive this, as a Solutions Architect, I do Chaos Engineering, Dev Teams mentoring, metrics tracking, dev teams mentoring, architecture and performance improvements... ',
+        technologies: [
+            'React',
+            'Svelte',
+            'Astro',
+            'Typescript',
+            'Docker',
+            'Kubernetes',
+            'NextJS',
+        ],
+        image: 'betonline.png',
+        link: 'https://betonline.ag',
+    },
+    {
+        name: 'Orange',
+        title: 'Full refactor of their website',
+        description:
+            'As part of the Architecture Core Team, my job consisted on orchestating the hole refactoring of the main website. Among others, I helped to define and create the global architecture, CI/CD, style guides, performance metrics, scaffolding tools and lead technical improvement plans.',
+        technologies: [
+            'Angular',
+            'Typescript',
+            'Docker',
+            'Kubernetes',
+            'NodeJS',
+        ],
+        image: 'orange2.png',
+        link: 'https://www.orange.es',
+    },
+    {
+        name: 'Bixby',
+        title: 'Creation of the version 2',
+        description:
+            'The version 2 was developed from scratch in order to take it to the next level. Working as a Tech Lead, I was responsible for leading the technical roadmap for the Spanish version of Bixby v2.',
+        technologies: ['Javascript', 'Java', 'NodeJS'],
+        image: 'bixby.png',
+        link: 'https://www.samsung.com/us/apps/bixby/',
+    },
+]
+---
+
+<section
+    id="experience"
+    class=`
+        flex flex-col relative items-center 
+        px-6 w-full 
+        scroll-mt-24 bg-darkblue shadow shadow-white`
+>
+    <h2
+        class=`
+            w-full sm:max-w-xl lg:max-w-3xl text-3xl sm:text-4xl text-bold pt-8 
+            after:h-px after:mt-2 after:block after:bg-powercyan after:w-full
+        `
+    >
+        Experience Highlights
+    </h2>
+    {
+        PROJECTS.map((project) => (
+            <div class="flex flex-col justify-center w-full h-full sm:max-w-xl lg:max-w-3xl py-12">
+                <h3 class="text-3xl text-bold pb-4 text-softcyan">
+                    {project.name}
+                </h3>
+                <p class="text-xl pb-4">{project.title}</p>
+                <p class="">{project.description}</p>
+                <a class="mt-8" href={project.link}>
+                    <img
+                        src={project.image}
+                        alt=""
+                        class="flex relative justify-center h-80 sm:h-128 w-full rounded-lg shadow-xl shadow-white/10"
+                    />
+                </a>
+            </div>
+        ))
+    }
+</section>

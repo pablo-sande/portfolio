@@ -5,20 +5,36 @@ import Layout from '../layouts/Layout.astro'
 ---
 
 <Layout title="site">
-    <div
+    <section
         class="text-white max-w-screen-lg m-auto p-4 sm:p-6 relative flex flex-col justify-center items-center"
     >
-        <h2 class="text-4xl py-4">About this site</h2>
-        <p class="p-8">
-            This site is a work in progress. Let me start by telling you that
-            yes, it is over-engineered. I did it for the purpose of showing my
-            understanding of some technologies. It consists of an Hybrid Astro
-            app running on NodeJS. Being in Hybrid mode means that some pages
-            are Static Site Generated while others are Server Side Rendered. The
-            project is Dockerized and deployed in a Kubernetes cluster hosted in
-            DigitalOcean.
-        </p>
-        <a href="" class="my-8">Check it on GitHub</a>
+        <div class="h-screen flex relative flex-col">
+            <h2
+                class="text-4xl p-4 after:h-px after:mt-2 after:block after:bg-powercyan after:w-full"
+            >
+                About this site
+            </h2>
+            <p class="pt-8">
+                This site is a work in progress. Let me start by telling you
+                that yes, it is over-engineered. I did it for the purpose of
+                showing my understanding of some technologies. And well... for
+                fun too :P
+            </p>
+            <p class="pt-8">
+                I could have gone for a full static site and just host it in
+                Vercel like everybody else does. But since this is not a
+                professional app and I don't care about min-maxing, I took a
+                different approach.
+            </p>
+            <p class="pt-8">
+                This site consists of an Hybrid Astro app running on NodeJS.
+                Being in Hybrid mode means that some pages are Static Site
+                Generated while others are Server Side Rendered. The project is
+                Dockerized and deployed in a humble single node Kubernetes
+                cluster hosted in DigitalOcean.
+            </p>
+            <a href="" class="my-8">Check it on GitHub</a>
+        </div>
 
         <div
             class="flex text-center items-center flex-col p-8 bg-black bg-opacity-75 rounded-lg"
@@ -104,10 +120,5 @@ import Layout from '../layouts/Layout.astro'
         >
             <DiagramCard textLines={['Kubernetes Cluster']} />
         </div>
-    </div>
+    </section>
 </Layout>
-
-<style lang="scss">
-    .card {
-    }
-</style>
