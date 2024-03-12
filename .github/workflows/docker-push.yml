@@ -44,49 +44,23 @@ jobs:
                   tags: |
                       ${{ steps.meta.outputs.tags }}-${{ env.TAG }}
                   labels: ${{ steps.meta.outputs.labels }}
-    # deploy:
-    #     name: Deploy
-    #     if: github.ref == 'refs/heads/main'
-    #     needs: [build-and-push-image]
-    #     runs-on: ubuntu-latest
-    #     steps:
-    #         - name: Checkout repository
-    #           uses: actions/checkout@v4
-    #         - name: Install doctl
-    #           uses: digitalocean/action-doctl@v2
-    #           with:
-    #               token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-    #         - name: Save DigitalOcean kubeconfig with short-lived credentials
-    #           run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 pablosande-cluster
-    #         - name: Apply deployment yaml
-    #           run: doctl kubectl apply -f deployment.yaml
-    #         # - name: Deploy to DigitalOcean Kubernetes
-    #         #   run: kubectl rollout restart deployment/portfolio-deployment -n default
-    #         - name: Verify deployment
-    #           run: kubectl rollout status deployment/portfolio-deployment -n default
-
     deploy:
+        name: Deploy
+        if: github.ref == 'refs/heads/main'
+        needs: [build-and-push-image]
         runs-on: ubuntu-latest
-
         steps:
-            - uses: actions/checkout@v2
-
-            - name: Install Digitalocean doctl
+            - name: Checkout repository
+              uses: actions/checkout@v4
+            - name: Install doctl
               uses: digitalocean/action-doctl@v2
               with:
                   token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
-
-            - name: Log in to DigitalOcean Container Registry with short-lived credentials
-              run: doctl registry login --expiry-seconds 600
-
-            # - name: Update deployment file
-            #   run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|registry.digitalocean.com/myregistry/myproject:'${TAG}'|' $GITHUB_WORKSPACE/kubernetes-do.yaml
-
-            # - name: Save DigitalOcean kubeconfig
-            #   run: doctl kubernetes cluster kubeconfig save pablosande-cluster
-
-            # - name: Store DO authentication token as a secret in cluster
-            #   run: doctl registry kubernetes-manifest | kubectl apply -f -
-
+            - name: Save DigitalOcean kubeconfig with short-lived credentials
+              run: doctl kubernetes cluster kubeconfig save --expiry-seconds 600 pablosande-cluster
+            - name: Apply deployment yaml
+              run: doctl kubectl apply -f $GITHUB_WORKSPACE/deployment.yaml
             - name: Deploy to DigitalOcean Kubernetes
-              run: kubectl apply -f $GITHUB_WORKSPACE/deployment.yaml
+              run: kubectl rollout restart deployment/portfolio-deployment -n default
+            - name: Verify deployment
+              run: kubectl rollout status deployment/portfolio-deployment -n default
