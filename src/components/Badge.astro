@@ -7,9 +7,7 @@ const { icon, title } = Astro.props
 ---
 
 <div class="rounded-2xl bg-lightgray flex flex-row p-1 m-1 items-center">
-    <div
-        class="size-6 bg-lightgray rounded-full flex items-center justify-center p-1"
-    >
+    <div class="size-6 rounded-full flex p-1">
         <Fragment set:html={icon} />
     </div>
     <p class="px-2 text-sm text-black">{title}</p>
