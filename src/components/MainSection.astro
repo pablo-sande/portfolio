@@ -8,9 +8,11 @@
         <div class="ellipse ellipse-out">
             <div class="electron"></div>
         </div>
+
         <div class="ellipse ellipse-out">
             <div class="electron"></div>
         </div>
+
         <div class="ellipse pablo-ellipse">
             <img
                 src="/pablo.png"
@@ -25,7 +27,7 @@
 
     <div class="flex">
         <h1
-            class="show-up text-4xl xs:text-5xl sm:text-6xl font-bold text-center pt-4 xs:pt-12 text-softcyan"
+            class="show-up text-4xl xs:text-5xl sm:text-6xl font-bold text-center md:pt-12 text-softcyan"
         >
             Frontend
         </h1>
@@ -40,7 +42,7 @@
 
     <a
         href="#experience"
-        class="rounded-lg bg-bluegray relative flex p-4 mt-6 show-up"
+        class="rounded-3xl bg-bluegray relative flex p-4 mt-6 show-up"
         >View my Work</a
     >
 </section>
@@ -105,11 +107,12 @@
 
     @keyframes stop {
         0% {
-            transform: rotateZ(360deg) translateX($ellipse) rotateY(-70deg);
-        }
-        1% {
+            // transform: rotateZ(360deg) translateX($ellipse) rotateY(-70deg);
             transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
         }
+        // 1% {
+        //     transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
+        // }
         100% {
             transform: rotateZ(180deg) translateX(0) rotateY(70deg);
         }

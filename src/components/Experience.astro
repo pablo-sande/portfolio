@@ -3,7 +3,6 @@ import Section from './Section.astro'
 import Badge from './Badge.astro'
 import client from '../lib/apollo-client'
 import graph from 'graphql-tag'
-import { isTemplateLiteralToken } from 'typescript'
 
 const { data, loading } = await client.query({
     query: graph`
@@ -29,7 +28,7 @@ const PROJECTS = [
         title: 'Website optimization',
         position: 'Solutions Architect',
         description:
-            'This site has insane traffic and that requires an excellent performance optimization and 100% uptime. To achive this, as a Solutions Architect, I do Chaos Engineering, Dev Teams mentoring, metrics tracking, architecture and performance improvements, Give support to Engineering Teams by reviewing their code and helping them with decission making... ',
+            "This site has insane traffic and that requires an <span class='text-softcyan'>excellent performance</span> optimization and <span class='text-softcyan'>100% uptime</span>. To achive this, as a <span class='text-softcyan'>Solutions Architect</span>, I do Chaos Engineering, Dev Teams mentoring, metrics tracking, architecture and performance improvements, Give support to Engineering Teams by reviewing their code and helping them with decission making... ",
         technologies: [
             'React',
             'Svelte',
@@ -47,7 +46,7 @@ const PROJECTS = [
         title: 'Embeded Software with custom Interface',
         position: 'Software Engineer/Team Lead',
         description:
-            "I built the low-level interface using Chromium and Webkit, enabling communication with the hardware's physical actions. Additionally, I developed a React Single Page Application (SPA) that served as the user interface. I also ensured that the system met all the robustness, fail-proof, and security checks required in the healthcare industry.",
+            "<span class='text-softcyan'>Leading the Frontend Team</span>, I built the <span class='text-softcyan'>low-level interface</span> using Chromium, enabling communication with the hardware's physical actions. Additionally, I developed a React Single Page Application (SPA) that served as the user interface. The hardware was <span class='text-softcyan'>connected to AWS</span> and could trigger remote software updates. I also ensured that the system met all the <span class='text-softcyan'>robustness, fail-proof, and security checks</span> required in the healthcare industry.",
         technologies: [
             'React',
             'Chromium',
@@ -64,7 +63,7 @@ const PROJECTS = [
         title: 'Full website refactor',
         position: 'Frontend Architect',
         description:
-            'As part of the Architecture Core Team, my job consisted on orchestating the hole refactoring of the main website. Among others, I helped to define and create the global architecture, CI/CD, style guides, performance metrics, scaffolding tools and lead technical improvement plans.',
+            "As part of the <span class='text-softcyan'>Architecture Core Team</span>, my job consisted on orchestating the <span class='text-softcyan'>hole refactoring</span> of the main website. Among others, I helped to define and create the global architecture, CI/CD, style guides, performance metrics, scaffolding tools and lead technical improvement plans.",
         technologies: [
             'Angular',
             'Typescript',
@@ -80,21 +79,18 @@ const PROJECTS = [
         title: 'Version 2 development',
         position: 'Software Engineer/Technical Lead',
         description:
-            'The version 2 was developed from scratch in order to take it to the next level. Working as a Tech Lead, I was responsible for leading the technical roadmap for the Spanish version of Bixby v2.',
+            "The version 2 was developed from scratch in order to compete with the leaeding Voice Assistants in the industry. Working as a <span class='text-softcyan'>Tech Lead</span>, I was responsible for <span class='text-softcyan'>leading the technical roadmap</span> for the Spanish team version of Bixby v2. One of the biggest challenges was to <span class='text-softcyan'>integrate with several service providers</span>, most of them requiring a specific integration layer",
         technologies: ['Javascript', 'Java', 'NodeJS'],
         image: 'bixby.png',
         link: 'https://www.samsung.com/us/apps/bixby/',
     },
 ]
 
-const getTechnologyIcon = (technology: string) => {
-    return (
-        technologyItem.find(
-            (item: TechnologyItem) =>
-                item.title.toLowerCase() === technology.toLowerCase()
-        )?.thumbnail || ''
-    )
-}
+const getTechnologyIcon = (technology: string) =>
+    technologyItem.find(
+        (item: TechnologyItem) =>
+            item.title.toLowerCase() === technology.toLowerCase()
+    )?.thumbnail || ''
 ---
 
 <Section
@@ -109,7 +105,9 @@ const getTechnologyIcon = (technology: string) => {
                     {project.name}
                 </h3>
                 <p class="text-xl pb-4">{project.title}</p>
-                <p class="">{project.description}</p>
+                <div id="project-description" class="inline">
+                    <Fragment set:html={project.description} />
+                </div>
                 <ul class="flex flex-row flex-wrap pt-4">
                     {project.technologies.map((technology) => (
                         <li class="relative flex">
