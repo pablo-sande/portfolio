@@ -1,10 +1,35 @@
 ---
+import Section from './Section.astro'
+import Badge from './Badge.astro'
+import client from '../lib/apollo-client'
+import graph from 'graphql-tag'
+import { isTemplateLiteralToken } from 'typescript'
+
+const { data, loading } = await client.query({
+    query: graph`
+        query SkillLevels {
+            skills {
+                title,
+                thumbnail,
+            }
+        }
+    `,
+})
+
+type TechnologyItem = {
+    title: string
+    thumbnail: string
+}
+
+const technologyItem: Array<TechnologyItem> = data.skills
+
 const PROJECTS = [
     {
         name: 'Betonline',
         title: 'Website optimization',
+        position: 'Solutions Architect',
         description:
-            'This site has insane traffic and that requires an excellent performance optimization and 100% uptime. To achive this, as a Solutions Architect, I do Chaos Engineering, Dev Teams mentoring, metrics tracking, dev teams mentoring, architecture and performance improvements... ',
+            'This site has insane traffic and that requires an excellent performance optimization and 100% uptime. To achive this, as a Solutions Architect, I do Chaos Engineering, Dev Teams mentoring, metrics tracking, architecture and performance improvements, Give support to Engineering Teams by reviewing their code and helping them with decission making... ',
         technologies: [
             'React',
             'Svelte',
@@ -18,8 +43,26 @@ const PROJECTS = [
         link: 'https://betonline.ag',
     },
     {
+        name: 'DaVitri',
+        title: 'Embeded Software with custom Interface',
+        position: 'Software Engineer/Team Lead',
+        description:
+            "I built the low-level interface using Chromium and Webkit, enabling communication with the hardware's physical actions. Additionally, I developed a React Single Page Application (SPA) that served as the user interface. I also ensured that the system met all the robustness, fail-proof, and security checks required in the healthcare industry.",
+        technologies: [
+            'React',
+            'Chromium',
+            'NodeJS',
+            'Javascript',
+            'AWS',
+            'Tailwind',
+        ],
+        image: 'davitri.png',
+        link: 'https://overture.life/davitri',
+    },
+    {
         name: 'Orange',
-        title: 'Full refactor of their website',
+        title: 'Full website refactor',
+        position: 'Frontend Architect',
         description:
             'As part of the Architecture Core Team, my job consisted on orchestating the hole refactoring of the main website. Among others, I helped to define and create the global architecture, CI/CD, style guides, performance metrics, scaffolding tools and lead technical improvement plans.',
         technologies: [
@@ -29,12 +72,13 @@ const PROJECTS = [
             'Kubernetes',
             'NodeJS',
         ],
-        image: 'orange2.png',
+        image: 'orange.png',
         link: 'https://www.orange.es',
     },
     {
         name: 'Bixby',
-        title: 'Creation of the version 2',
+        title: 'Version 2 development',
+        position: 'Software Engineer/Technical Lead',
         description:
             'The version 2 was developed from scratch in order to take it to the next level. Working as a Tech Lead, I was responsible for leading the technical roadmap for the Spanish version of Bixby v2.',
         technologies: ['Javascript', 'Java', 'NodeJS'],
@@ -42,39 +86,51 @@ const PROJECTS = [
         link: 'https://www.samsung.com/us/apps/bixby/',
     },
 ]
+
+const getTechnologyIcon = (technology: string) => {
+    return (
+        technologyItem.find(
+            (item: TechnologyItem) =>
+                item.title.toLowerCase() === technology.toLowerCase()
+        )?.thumbnail || ''
+    )
+}
 ---
 
-<section
-    id="experience"
-    class=`
-        flex flex-col relative items-center 
-        px-6 w-full 
-        scroll-mt-24 bg-darkblue shadow shadow-white`
+<Section
+    idName="experience"
+    wrapperClass="bg-darkblue"
+    title="Experience Highlights"
 >
-    <h2
-        class=`
-            w-full sm:max-w-xl lg:max-w-3xl text-3xl sm:text-4xl text-bold pt-8 
-            after:h-px after:mt-2 after:block after:bg-powercyan after:w-full
-        `
-    >
-        Experience Highlights
-    </h2>
     {
         PROJECTS.map((project) => (
-            <div class="flex flex-col justify-center w-full h-full sm:max-w-xl lg:max-w-3xl py-12">
+            <article class="flex flex-col justify-center w-full h-full sm:max-w-xl lg:max-w-3xl py-12 group">
                 <h3 class="text-3xl text-bold pb-4 text-softcyan">
                     {project.name}
                 </h3>
                 <p class="text-xl pb-4">{project.title}</p>
                 <p class="">{project.description}</p>
+                <ul class="flex flex-row flex-wrap pt-4">
+                    {project.technologies.map((technology) => (
+                        <li class="relative flex">
+                            <Badge
+                                icon={getTechnologyIcon(technology)}
+                                title={technology}
+                            />
+                        </li>
+                    ))}
+                </ul>
                 <a class="mt-8" href={project.link}>
-                    <img
-                        src={project.image}
-                        alt=""
-                        class="flex relative justify-center h-80 sm:h-128 w-full rounded-lg shadow-xl shadow-white/10"
-                    />
+                    <div class="transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+                        <img
+                            src={project.image}
+                            loading="lazy"
+                            alt=""
+                            class="md:scale-105 md:group-hover:scale-100 object-cover transition duration-500 flex relative justify-center h-64 sm:h-128 w-full rounded-lg shadow-xl shadow-white/10"
+                        />
+                    </div>
                 </a>
-            </div>
+            </article>
         ))
     }
-</section>
+</Section>

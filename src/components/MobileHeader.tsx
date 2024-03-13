@@ -12,7 +12,7 @@ export const MobileHeader = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.75}
                     stroke="currentColor"
-                    className={"w-8 h-8 text-white hover:text-blue-400" + (isOpen ? 'hidden' : '')}
+                    className={"w-8 h-8 text-white hover:text-blue-400 " + (isOpen ? 'hidden' : '')}
                 >
                     <path
                         strokeLinecap="round"
@@ -23,7 +23,7 @@ export const MobileHeader = () => {
             </button>
             {/* rgb(63 186 205) */}
             <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-                <Dialog.Panel className="fixed top-0 left-0 h-full w-full flex flex-col justify-center items-center">
+                <Dialog.Panel className="fixed top-0 left-0 h-full w-full flex flex-col justify-center items-center z-10">
                 <div className="fixed left-0 top-0 -z-10 h-full w-full">
                     <div className="absolute h-full w-full top-0 z-[-2] bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]">
                     </div>
@@ -32,11 +32,11 @@ export const MobileHeader = () => {
                     <button onClick={() => setIsOpen(false)}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
+                            fill="white"
                             viewBox="0 0 24 24"
                             strokeWidth={1.5}
                             stroke="currentColor"
-                            className="w-8 h-8 fixed top-[36px] right-[32px] text-black hover:text-blue-400"
+                            className="w-8 h-8 fixed top-[36px] right-[32px] text-white hover:text-blue-400"
                         >
                             <path
                                 strokeLinecap="round"
@@ -52,22 +52,33 @@ export const MobileHeader = () => {
 
                     <div className="flex flex-col items-center justify-center space-3">
                         <a
+                            href="#about"
+                            className="text-white text-xl mt-6"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            About Me
+                        </a>
+                        <a
                             href="/skills"
                             className="text-white text-xl mt-6"
+                            onClick={() => setIsOpen(false)}
                         >
                             Skills
                         </a>
                         <a href="/site" className="text-white text-xl mt-6"
+                        onClick={() => setIsOpen(false)}
             >About this site</a>
                         <a
                             href="/contact"
                             className="text-white text-xl mt-6"
+                            onClick={() => setIsOpen(false)}
                         >
                             Contact
                         </a>
                         <a
                             href="/cv"
                             className="text-white text-xl mt-6"
+                            onClick={() => setIsOpen(false)}
                         >
                             Download CV
                         </a>

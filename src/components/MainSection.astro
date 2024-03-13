@@ -1,18 +1,28 @@
-<object
-    type="image/svg+xml"
-    data="rocket3.svg"
-    class="-rotate-45 launch fixed left-0 right-0 ml-auto mr-auto"></object>
 <section
     class=`
-                launch-section overflow-x-hidden overflow-y-auto
-                flex flex-col items-center max-w-screen h-section p-5 z-200
-            `
+            overflow-x-hidden overflow-y-auto
+            flex flex-col items-center max-w-screen h-section p-5 z-200
+        `
 >
-    <img
-        src="/pablo.png"
-        alt=""
-        class="max-w-72 max-h-72 md:max-w-96 md:max-h-96 size-in rounded-full shadow-[0_0_10px_5px] shadow-gray-500"
-    />
+    <div class="flex relative justify-center items-center w-full h-96">
+        <div class="ellipse ellipse-out">
+            <div class="electron"></div>
+        </div>
+        <div class="ellipse ellipse-out">
+            <div class="electron"></div>
+        </div>
+        <div class="ellipse pablo-ellipse">
+            <img
+                src="/pablo.png"
+                alt="Pablo Sande"
+                class=`
+                    pablo max-w-72 max-h-72 md:max-w-96 md:max-h-96 
+                    rounded-full shadow-[0_0_10px_5px] shadow-gray-500"
+                `
+            />
+        </div>
+    </div>
+
     <div class="flex">
         <h1
             class="show-up text-4xl xs:text-5xl sm:text-6xl font-bold text-center pt-4 xs:pt-12 text-softcyan"
@@ -36,68 +46,128 @@
 </section>
 
 <style lang="scss">
-    .launch {
-        width: 20rem;
-        height: 20rem;
-        animation: launch 3.5s linear 1s forwards;
-        margin-top: -150vh;
+    $ellipse: 120px;
+    $electron: calc($ellipse/15);
+    $animationChain: 4.5;
+
+    @mixin atom($mod) {
+        width: $mod * 2;
+        height: $mod * 2;
+        border-radius: 50%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        position: absolute;
     }
 
-    @keyframes launch {
+    .ellipse {
+        @include atom($ellipse);
+        border: 4px #555 solid;
+        transform-style: preserve-3d;
+        .electron {
+            @include atom($electron);
+            background: deepskyblue;
+            animation:
+                move linear infinite,
+                ellipseout 1s linear 2s forwards;
+        }
+        @for $i from 1 through 2 {
+            &:nth-child(#{$i}) {
+                transform: rotateZ($i * 2 * 30deg) rotateY(70deg);
+                .electron {
+                    animation-duration: $i + 0.25 + s;
+                }
+            }
+        }
+    }
+
+    @keyframes pabloellipseout {
+        from {
+            border: 4px solid #555;
+        }
+        to {
+            border: 4px solid transparent;
+        }
+    }
+
+    @keyframes move {
+        from {
+            transform: rotateZ(0) translateX($ellipse) rotateZ(0)
+                rotateY(-70deg);
+        }
+        to {
+            transform: rotateZ(360deg) translateX($ellipse) rotateZ(-360deg)
+                rotateY(-70deg);
+        }
+    }
+
+    @keyframes stop {
         0% {
-            margin-top: 100vh;
+            transform: rotateZ(360deg) translateX($ellipse) rotateY(-70deg);
         }
-        25% {
-            margin-top: 35vh;
-        }
-        50% {
-            margin-top: 20vh;
+        1% {
+            transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
         }
         100% {
-            margin-top: -150vh;
+            transform: rotateZ(180deg) translateX(0) rotateY(70deg);
         }
     }
 
-    .launch-section {
-        animation: launchsection 3.5s linear 1s forwards;
-        margin-top: 100vh;
-        padding-top: 4.6rem;
-    }
-
-    @keyframes launchsection {
-        0% {
-            margin-top: 100vh;
-            padding-top: 4.6rem;
-        }
-        25% {
-            margin-top: 35vh;
-            padding-top: 4.6rem;
-        }
-        50% {
-            margin-top: 20vh;
-            padding-top: 4.6rem;
-        }
-        70% {
-            margin-top: 20vh;
-            padding-top: 4.6rem;
-        }
-        100% {
-            margin-top: 0;
-            padding-top: 2rem;
-        }
-    }
-
-    .size-in {
-        width: 3.4rem;
-        height: 3.4rem;
+    .pablo-ellipse {
+        transform: rotateZ(6 * 30deg) rotateY(70deg);
         animation:
-            sizein 1s linear 3.5s forwards,
-            float 6s linear infinite 6s;
+            normalsize 1s ease-in 4s forwards,
+            pabloellipseout 2s linear 2s forwards;
+    }
+
+    @keyframes normalposition {
+        from {
+        }
+        to {
+            transform: rotateY(290deg) rotateZ(180deg);
+        }
+    }
+
+    @keyframes normalsize {
+        0% {
+            width: $ellipse;
+            height: $ellipse;
+        }
+        to {
+            width: 100%;
+            height: 24rem;
+        }
+    }
+
+    .pablo {
+        @include atom($electron);
+        width: 0;
+        height: 0;
+        transform: rotateZ(0) translateX(0) rotateZ(0) rotateY(0);
+        animation:
+            move $animationChain + s ease-out,
+            normalposition 0s linear $animationChain + s forwards,
+            stop 0.5s linear $animationChain + s forwards,
+            sizein 1s ease-in $animationChain + 0.5s forwards,
+            float 6s linear infinite $animationChain + 2s;
+    }
+
+    @keyframes sizein {
+        from {
+            width: 0;
+            height: 0;
+        }
+        to {
+            width: 24rem;
+            height: 24rem;
+        }
     }
 
     .show-up {
         opacity: 0;
-        animation: showup 1s linear 5s forwards;
+        animation: showup 1s linear 0.5s forwards;
     }
 
     @keyframes showup {
@@ -109,90 +179,44 @@
         }
     }
 
-    @keyframes sizein {
-        0% {
-            width: 3.4rem;
-            height: 3.4rem;
-        }
-        100% {
-            width: 24rem;
-            height: 24rem;
-        }
+    .ellipse-out {
+        animation: ellipseout 1s linear 3s forwards;
     }
 
-    @keyframes jumpout {
-        0% {
-            transform: translate(0, 0);
+    @keyframes ellipseout {
+        from {
+            border: 4px solid #555;
         }
-        20% {
-            transform: translate(5rem, -3rem);
-        }
-        100% {
-            transform: translate(0, 0);
+        to {
+            background: transparent;
+            border: 4px solid transparent;
         }
     }
 
     .floating {
-        transform: translate(0, 0);
         animation: float 6s linear 2.5s infinite;
     }
 
     @keyframes float {
         0% {
-            transform: translate(0, 0);
+            transform: rotateZ(180deg) translateX(0) translateY(0)
+                rotateY(70deg);
         }
         25% {
-            transform: translate(0, -4px);
+            transform: rotateZ(180deg) translateX(0) translateY(-4px)
+                rotateY(70deg);
         }
         50% {
-            transform: translate(-4px, -6px);
+            transform: rotateZ(180deg) translateX(-4px) translateY(-6px)
+                rotateY(70deg);
         }
         75% {
-            transform: translate(1px, -7px);
+            transform: rotateZ(180deg) translateX(1px) translateY(-7px)
+                rotateY(70deg);
         }
         100% {
-            transform: translate(0, 0);
-        }
-    }
-
-    .type-in {
-        overflow: hidden;
-        border-right: 0.1em solid white;
-        white-space: nowrap;
-        margin: 0 auto;
-        opacity: 0;
-    }
-
-    .type-in-1 {
-        animation:
-            showup 0s linear 5s forwards,
-            typing 1s steps(10, end) 5s,
-            blink-caret 1s step-end 5s forwards;
-    }
-
-    .type-in-2 {
-        animation:
-            showup 0s linear 6s forwards,
-            typing 1s steps(10, end) 6s,
-            blink-caret 1s step-end 6s forwards;
-    }
-
-    @keyframes typing {
-        from {
-            width: 0;
-        }
-        to {
-            width: 100%;
-        }
-    }
-
-    @keyframes blink-caret {
-        from,
-        to {
-            border-color: transparent;
-        }
-        50% {
-            border-color: white;
+            transform: rotateZ(180deg) translateX(0) translateY(0)
+                rotateY(70deg);
         }
     }
 </style>

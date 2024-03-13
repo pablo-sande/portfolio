@@ -1,0 +1,35 @@
+---
+interface Props {
+    idName: string
+    wrapperClass: string
+    title: string
+}
+
+const { idName, wrapperClass, title } = Astro.props as Props
+---
+
+<section
+    id={idName}
+    class:list={[
+        `
+        flex flex-col relative items-center 
+        px-6 w-full 
+        scroll-mt-24
+        justify-center items-center
+    `,
+        wrapperClass,
+    ]}
+>
+    <div class="flex flex-col relative sm:max-w-xl lg:max-w-3xl py-12">
+        <h2
+            class=`
+                w-full sm:max-w-xl lg:max-w-3xl text-3xl sm:text-4xl text-bold pt-8 
+                after:h-px after:mt-2 after:block after:bg-powercyan after:w-full
+                `
+        >
+            {title}
+        </h2>
+
+        <slot />
+    </div>
+</section>

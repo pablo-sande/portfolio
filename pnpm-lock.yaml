@@ -20,6 +20,9 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^5.1.0
     version: 5.1.0(astro@4.4.15)(tailwindcss@3.4.1)
+  '@fontsource/electrolize':
+    specifier: ^5.0.18
+    version: 5.0.18
   '@headlessui/react':
     specifier: ^1.7.18
     version: 1.7.18(react-dom@18.2.0)(react@18.2.0)
@@ -744,6 +747,10 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fontsource/electrolize@5.0.18:
+    resolution: {integrity: sha512-ypxX9TOei+XkmvbFbQiOVVmxiehJ9eHWxOr4cMLr3IiZxKqhMxogvfvwFhqIwjU3tqHdkxn65JyA5DjRaYBvrw==}
+    dev: false
 
   /@graphql-tools/executor@1.2.1(graphql@16.8.1):
     resolution: {integrity: sha512-BP5UI1etbNOXmTSt7q4NL1+zsURFgh2pG+Hyt9K/xO0LlsfbSx59L5dHLerqZP7Js0xI6GYqrUQ4m29rUwUHJg==}

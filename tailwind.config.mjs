@@ -11,7 +11,8 @@ export default {
 				'softcyan': '#33abc0',
 				'bluegray': '#273747',
 				'almostblack': '#020617',
-				'darkblue': '#020f13'
+				'darkblue': '#020f13',
+				'lightgray': '#F0EEE8',
 			},
 			screens: {
 				'xs': '380px',

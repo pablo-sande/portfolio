@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "type": "module",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "scripts": {
     "dev": "astro dev",
     "start": "node ./dist/server/entry.mjs",
@@ -15,6 +15,7 @@
     "@astrojs/node": "^8.2.3",
     "@astrojs/react": "^3.0.10",
     "@astrojs/tailwind": "^5.1.0",
+    "@fontsource/electrolize": "^5.0.18",
     "@headlessui/react": "^1.7.18",
     "astro": "^4.4.11",
     "graphql": "^16.8.1",
