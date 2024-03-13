@@ -8,7 +8,7 @@ type Fields = {
 }
 export const ContactForm = () => {
     const { register, handleSubmit } = useForm<Fields>();
-    const onSubmitForm = (fields) => {
+    const onSubmitForm = (fields: Fields) => {
 
     }
 
