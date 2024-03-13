@@ -121,7 +121,7 @@
     .pablo-ellipse {
         transform: rotateZ(6 * 30deg) rotateY(70deg);
         animation:
-            normalsize 1s ease-in 4s forwards,
+            normalsize 0s ease-in 4s forwards,
             pabloellipseout 2s linear 2s forwards;
     }
 
@@ -148,7 +148,7 @@
         @include atom($electron);
         width: 0;
         height: 0;
-        transform: rotateZ(0) translateX(0) rotateZ(0) rotateY(0);
+        // transform: rotateZ(0) translateX(0) rotateZ(0) rotateY(0);
         animation:
             move $animationChain + s ease-out,
             normalposition 0s linear $animationChain + s forwards,
