@@ -68,6 +68,7 @@
         @include atom($ellipse);
         border: 4px #555 solid;
         transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
         .electron {
             @include atom($electron);
             background: deepskyblue;
@@ -98,10 +99,14 @@
         from {
             transform: rotateZ(0) translateX($ellipse) rotateZ(0)
                 rotateY(-70deg);
+            -webkit-transform: rotateZ(0) translateX($ellipse) rotateZ(0)
+                rotateY(-70deg);
         }
         to {
             transform: rotateZ(360deg) translateX($ellipse) rotateZ(-360deg)
                 rotateY(-70deg);
+            -webkit-transform: rotateZ(360deg) translateX($ellipse)
+                rotateZ(-360deg) rotateY(-70deg);
         }
     }
 
@@ -109,17 +114,20 @@
         0% {
             // transform: rotateZ(360deg) translateX($ellipse) rotateY(-70deg);
             transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
+            -webkit-transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
         }
         // 1% {
         //     transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
         // }
         100% {
             transform: rotateZ(180deg) translateX(0) rotateY(70deg);
+            -webkit-transform: rotateZ(180deg) translateX(0) rotateY(70deg);
         }
     }
 
     .pablo-ellipse {
         transform: rotateZ(6 * 30deg) rotateY(70deg);
+        -webkit-transform: rotateZ(6 * 30deg) rotateY(70deg);
         animation:
             normalsize 0s ease-in 4s forwards,
             pabloellipseout 2s linear 2s forwards;
@@ -130,6 +138,7 @@
         }
         to {
             transform: rotateY(290deg) rotateZ(180deg);
+            -webkit-transform: rotateY(290deg) rotateZ(180deg);
         }
     }
 
@@ -204,21 +213,31 @@
         0% {
             transform: rotateZ(180deg) translateX(0) translateY(0)
                 rotateY(70deg);
+            -webkit-transform: rotateZ(180deg) translateX(0) translateY(0)
+                rotateY(70deg);
         }
         25% {
             transform: rotateZ(180deg) translateX(0) translateY(-4px)
+                rotateY(70deg);
+            -webkit-transform: rotateZ(180deg) translateX(0) translateY(-4px)
                 rotateY(70deg);
         }
         50% {
             transform: rotateZ(180deg) translateX(-4px) translateY(-6px)
                 rotateY(70deg);
+            -webkit-transform: rotateZ(180deg) translateX(-4px) translateY(-6px)
+                rotateY(70deg);
         }
         75% {
             transform: rotateZ(180deg) translateX(1px) translateY(-7px)
                 rotateY(70deg);
+            -webkit-transform: rotateZ(180deg) translateX(1px) translateY(-7px)
+                rotateY(70deg);
         }
         100% {
             transform: rotateZ(180deg) translateX(0) translateY(0)
+                rotateY(70deg);
+            -webkit-transform: rotateZ(180deg) translateX(0) translateY(0)
                 rotateY(70deg);
         }
     }
