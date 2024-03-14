@@ -1,37 +1,54 @@
 ---
 import Section from '../components/Section.astro'
+import Badge from './Badge.astro'
+const INTERESTS =['Cats', 'Space', 'Coffee', 'Gaming', 'Quantum', 'Motorbikes', 'Coding']
 ---
 
 <Section title="About me" wrapperClass="bg-[#181818]" idName="about">
     <article class="pt-12 text-lg">
-        <p>
-            I'm Pablo, a Software Engineer with <span class="text-softcyan"
+        <div>
+
+            <p>
+                I'm Pablo, a Software Engineer with <span class="text-softcyan"
                 >10 years of experience</span
-            > based in Madrid (Spain).
-        </p>
-
-        <p class="pt-8">
-            Over the years I have worked for many different companies, <span
+                > based in Madrid (Spain).
+            </p>
+            
+            <p class="pt-8">
+                Over the years I have worked for many different companies, <span
                 class="text-softcyan">from startups to multinationals</span
-            >, for different industrial areas.
-        </p>
+                >, for different industrial areas.
+            </p>
+            
+            <p class="pt-8">
+                I love to develop code and teams that create solutions through
+                <span class="text-softcyan">technical excellence</span>. Mastering
+                the art of making trade-offs between cost and benefit, I always put
+                quality over quantity, delivery over promises.
+            </p>
+            
+            <p class="pt-8">
+                I have extensive experience working in Agile environments, giving
+                mentorship and training other developers.
+            </p>
 
-        <p class="pt-8">
-            I love to develop code and teams that create solutions through
-            <span class="text-softcyan">technical excellence</span>. Mastering
-            the art of making trade-offs between cost and benefit, I always put
-            quality over quantity, delivery over promises.
-        </p>
-
-        <p class="pt-8">
-            I have extensive experience working in Agile environments, giving
-            mentorship and training other developers.
-        </p>
-
-        <p class="pt-8">
-            I make sure to always maintain healthy communication between the
-            product/stakeholders and the development side and have a constant
-            delivery/review/validation process.
-        </p>
+            <p class="pt-8">
+                I make sure to always maintain healthy communication between the
+                product/stakeholders and the development side and have a constant
+                delivery/review/validation process.
+            </p>
+        </div>
+        
+        <h3 class="text-2xl pt-8">My Interests</h3>
+        
+        <ul class="pt-4 flex flex-wrap w-full">
+            {
+                INTERESTS.map(interest => (
+                    <li class="relative">
+                        <Badge iconType="path" icon={interest.toLowerCase()+'.svg'} title={interest}></Badge>
+                    </li>
+                ))
+            }
+        </ul>
     </article>
 </Section>

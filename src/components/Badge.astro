@@ -2,13 +2,15 @@
 interface Props {
     icon: string
     title: string
+    iconType: "path" | "html"
 }
-const { icon, title } = Astro.props
+const { icon, title, iconType } = Astro.props
 ---
 
 <div class="rounded-2xl bg-lightgray flex flex-row p-1 m-1 items-center">
     <div class="size-6 rounded-full flex p-1">
-        <Fragment set:html={icon} />
+        {iconType === 'html' && <Fragment set:html={icon} />}
+        {iconType === 'path' && <img src={icon}/>}
     </div>
-    <p class="px-2 text-sm text-black">{title}</p>
+    <p class="px-2 text-sm m-auto text-black">{title}</p>
 </div>
