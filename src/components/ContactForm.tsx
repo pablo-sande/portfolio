@@ -1,7 +1,6 @@
 import { useForm, type FieldError } from 'react-hook-form'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useFormik } from 'formik'
 import emailjs from '@emailjs/browser'
 import { useState } from 'react'
 
@@ -38,14 +37,15 @@ export const ContactForm = () => {
     });
     
     const submitForm = async (formValues: Fields) => {
+        console.log("import.meta.env ", import.meta.env, 'process.env ->', process.env, 'process.env.key --> ', process.env.PUBLIC_EMAILJS_SERVICE_ID)
         try {
-            setIsLoading(true);
-            await emailjs.send(
-                import.meta.env.PUBLIC_EMAILJS_SERVICE_ID, 
-                import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID, 
-                formValues,  
-                import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
-            )
+            // setIsLoading(true);
+            // await emailjs.send(
+            //     import.meta.env.PUBLIC_EMAILJS_SERVICE_ID, 
+            //     import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID, 
+            //     formValues,  
+            //     import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
+            // )
             reset()
             setStatusMessage("Thanks for your message :)")
             setStatusMessageClass('text-green-400')

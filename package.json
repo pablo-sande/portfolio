@@ -1,7 +1,7 @@
 {
   "name": "portfolio",
   "type": "module",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "scripts": {
     "dev": "astro dev",
     "start": "node ./dist/server/entry.mjs",
@@ -21,7 +21,7 @@
     "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
     "astro": "^4.4.11",
-    "formik": "^2.4.5",
+    "dotenv": "^16.4.5",
     "graphql": "^16.8.1",
     "graphql-tag": "^2.12.6",
     "graphql-yoga": "^5.1.1",
