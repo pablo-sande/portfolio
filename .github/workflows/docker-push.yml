@@ -4,10 +4,6 @@ on: [push]
 env:
     REGISTRY: ghcr.io
     IMAGE_NAME: ${{ github.repository }}
-    PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.PUBLIC_EMAILJS_SERVICE_ID }}
-    PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.PUBLIC_EMAILJS_TEMPLATE_ID }}
-    PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.PUBLIC_EMAILJS_PUBLIC_KEY }}
-
 jobs:
     build-and-push-image:
         runs-on: ubuntu-latest
@@ -43,6 +39,11 @@ jobs:
               uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
               with:
                   context: .
+                  build-args: |
+                      PUBLIC_EMAILJS_SERVICE_ID: ${{ secrets.PUBLIC_EMAILJS_SERVICE_ID }}
+                      PUBLIC_EMAILJS_TEMPLATE_ID: ${{ secrets.PUBLIC_EMAILJS_TEMPLATE_ID }}
+                      PUBLIC_EMAILJS_PUBLIC_KEY: ${{ secrets.PUBLIC_EMAILJS_PUBLIC_KEY }}
+
                   push: true
                   tags: |
                       ${{ steps.meta.outputs.tags }}-${{ env.TAG }}
