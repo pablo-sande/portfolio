@@ -37,7 +37,7 @@ export const ContactForm = () => {
     });
     
     const submitForm = async (formValues: Fields) => {
-        console.log("import.meta.env ", import.meta.env, 'process.env ->', process.env, 'process.env.key --> ', process.env.PUBLIC_EMAILJS_SERVICE_ID)
+        console.log("import.meta.env ", import.meta.env, 'import.meta.env.key --> ', import.meta.env.PUBLIC_EMAILJS_SERVICE_ID)
         try {
             // setIsLoading(true);
             // await emailjs.send(
