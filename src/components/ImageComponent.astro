@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { imagePath, altText, customClass } = Astro.props
-const images: any = await Astro.glob<ImageMetadata>('/src/assets/*')
+const images: any = await Astro.glob<ImageMetadata>('./assets/*')
 
 const img = images.find(
 	(i: { default: { src: string | string[] } }) =>
@@ -18,7 +18,7 @@ const img = images.find(
 
 if (!img)
 	throw new Error(
-		`"${img.default.src}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`
+		`"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`
 	)
 ---
 

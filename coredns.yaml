@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: default
+data:
+  log.override: |
+    log
+  custom.server: |
+    www.pablosande.dev {
+      forward . 8.8.8.8
+    }
