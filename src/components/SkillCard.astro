@@ -7,134 +7,96 @@ interface Props {
 
 const { item } = Astro.props as Props
 
-const MAX_ROTATION_RADIUS = 360
-const MAX_ANIMATION_DURATION = 1.25
+const MAX_ROTATION_RADIUS = 270
+const MAX_ANIMATION_DURATION = 1
+
+const getBorderColor = (offset: number) => {
+	return item.skillLevel > offset ? borderColor : 'transparent'
+}
+const borderColor = '#33abc0'
+const borderRightColor = getBorderColor(25)
+const borderBottomColor = getBorderColor(65)
+const borderLeftColor = getBorderColor(99)
 const borderRotationDegrees =
 	(item.skillLevel * MAX_ROTATION_RADIUS) / 100 + 'deg'
-const animationDuration = (item.skillLevel * MAX_ANIMATION_DURATION) / 100
+const animationDuration = (item.skillLevel * MAX_ANIMATION_DURATION) / 100 + 's'
 ---
 
-<div class="p-[0px] rounded-full relative h-[150px] w-[150px] m-auto">
+<div
+	class="p-[12px] rounded-full skillbox spin relative h-[150px] w-[150px] m-auto"
+>
 	<div
-		id={item.title.toLowerCase()}
-		class="p-2 relative rounded-full flex flex-col justify-center items-center w-full h-full"
+		class="bg-gray-200 relative rounded-full flex flex-col justify-center items-center w-full h-full"
 	>
-		<span
-			class="title timer flex flex-col justify-center items-center p-4 bg-gray-200"
-			data-from="0"
-			data-to={item.skillLevel}
-			data-speed={animationDuration}
-		>
-			<div class="w-16 h-16">
-				<Fragment set:html={item.thumbnail} />
-			</div>
-			<h2 class="font-bold text-md text-gray-800 text-center">
-				{item.title}
-			</h2>
-		</span>
-		<div class="overlay bg-gray-200"></div>
-		<div class="left"></div>
-		<div class="right"></div>
+		<div class="w-16 h-16">
+			<Fragment set:html={item.thumbnail} />
+		</div>
+		<h2 class="font-bold text-lg text-gray-800 text-center">
+			{item.title}
+		</h2>
 	</div>
 </div>
-
-<script>
-	document.getElementById(`angular`).addEventListener('mouseover', () => {
-		document.getElementById(`angular`).classList.add('progress')
-	})
-	document.getElementById(`angular`).addEventListener('mouseout', () => {
-		document.getElementById(`angular`).classList.remove('progress')
-	})
-</script>
 
 <style
 	lang="scss"
 	define:vars={{
+		borderBottomColor,
+		borderLeftColor,
+		borderRightColor,
 		borderRotationDegrees,
 		animationDuration,
+		borderColor,
 	}}
 >
-	svg {
-		fill: white !important;
-	}
-	path {
-		fill: white !important;
-	}
-	.timer {
-		border-radius: 9999px;
-		width: 126px;
-		height: 126px;
-	}
-	.progress {
-		border-radius: 50%;
-		position: relative;
-		overflow: hidden;
-		/* box-shadow: 2px 2px 2px 2px white; */
-	}
-	.progress::after {
-		content: '';
-	}
-	.progress .title {
-		position: relative;
-		z-index: 100;
-	}
-	.progress .overlay {
-		z-index: 1;
-		width: 50%;
-		height: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
-	.progress .left,
-	.progress .right {
-		width: 50%;
-		height: 100%;
-		position: absolute;
-		top: 0;
-		left: 0;
-		border: 12px solid rgb(4, 210, 217);
-		border-radius: 100px 0px 0px 100px;
-		border-right: 0;
-		transform-origin: right;
-	}
-	.progress .left {
-		animation: load1 1s linear forwards;
-	}
-	.progress:nth-of-type(2) .right,
-	.progress:nth-of-type(3) .right {
-		animation: load2 0.5s linear forwards 1s;
-	}
-	.progress:last-of-type .right,
-	.progress:first-of-type .right {
-		animation: load3 0.8s linear forwards 1s;
-	}
-	@keyframes load1 {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(180deg);
+	.skillbox {
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			border-radius: 9999px;
 		}
 	}
-	@keyframes load2 {
-		0% {
-			z-index: 100;
-			transform: rotate(180deg);
+
+	.spin {
+		&:hover {
+			color: var(--borderColor);
 		}
-		100% {
-			z-index: 100;
-			transform: rotate(270deg);
+
+		&::before,
+		&::after {
+			top: 0;
+			left: 0;
 		}
-	}
-	@keyframes load3 {
-		0% {
-			z-index: 100;
-			transform: rotate(180deg);
+
+		&::before {
+			border: 12px solid transparent;
 		}
-		100% {
-			z-index: 100;
+
+		&:hover::before {
+			border-top-color: var(--borderColor); // Show borders
+			border-right-color: var(--borderRightColor);
+			border-bottom-color: var(--borderBottomColor);
+			border-left-color: var(--borderLeftColor);
+
+			transition:
+				border-top-color 0s linear 0s,
+				border-right-color 0s linear 0.29s,
+				border-bottom-color 0s linear 0.63s,
+				border-left-color 0s linear 1s;
+		}
+
+		&::after {
+			border: 0 solid transparent;
+		}
+
+		&:hover::after {
+			border-top: 12px solid var(--borderColor);
+			border-left-width: 12px;
+			border-right-width: 12px;
 			transform: rotate(var(--borderRotationDegrees));
+			transition: transform var(--animationDuration) linear 0s;
 		}
 	}
 </style>

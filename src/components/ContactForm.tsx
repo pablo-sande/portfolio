@@ -24,7 +24,7 @@ interface ContactFormProps {
 export const ContactForm = (props: ContactFormProps) => {
     const formKeys: FormKeys = props.formKeys;
     const [statusMessage, setStatusMessage] = useState('');
-    const [statusMessageClass, setStatusMessageClass] = useState('text-powercyan');
+    const [statusMessageClass, setStatusMessageClass] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { 
         register, 
