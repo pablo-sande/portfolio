@@ -3,7 +3,7 @@ import Footer from '../components/Footer.astro'
 import Header from '../components/Header.astro'
 import '@fontsource/electrolize'
 interface Props {
-    title: string
+	title: string
 }
 
 const { title } = Astro.props
@@ -11,80 +11,76 @@ const { title } = Astro.props
 
 <!doctype html>
 <html lang="en" class="bg-black scroll-smooth">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="description" content="Astro description" />
-        <meta name="viewport" content="width=device-width" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Anta&display=swap"
-            rel="stylesheet"
-        />
-        <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
-    </head>
-    <!-- #229a24
-    #0fe011 -->
-    <body class="anta-regular text-white">
-        <!-- <div
-            class="blur-sm bg-[url('/home-background.png')] bg-cover bg-norepeat fixed w-full h-full top-0"
-        > -->
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Pablo Sande's Portfolio" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Anta&display=swap"
+			rel="stylesheet"
+		/>
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
 
-        <div class="fixed left-0 top-0 -z-10 h-full w-full">
-            <div class="relative h-full w-full bg-slate-950">
-                <div
-                    class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"
-                >
-                </div>
-            </div>
-        </div>
-        <div class="flex flex-col h-screen justify-between pt-28">
-            <Header />
-            <slot />
-            <Footer />
-        </div>
-        <style is:global>
-            .anta-regular {
-                font-family: 'Anta', sans-serif;
-                font-weight: 400;
-                font-style: normal;
-            }
-            :root {
-                color-scheme: light dark;
-            }
+	<body class="anta-regular text-white">
+		<div class="fixed left-0 top-0 -z-10 h-full w-full">
+			<div class="relative h-full w-full bg-slate-950">
+				<div
+					class="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"
+				>
+				</div>
+			</div>
+		</div>
+		<div id="top" class="flex flex-col h-screen justify-between pt-28">
+			<Header />
+			<slot />
+			<Footer />
+		</div>
 
-            html {
-                scroll-behavior: smooth;
-                backface-visibility: hidden;
-                -webkit-backface-visibility: hidden;
-            }
+		<style is:global>
+			.anta-regular {
+				font-family: 'Anta', sans-serif;
+				font-weight: 400;
+				font-style: normal;
+			}
+			:root {
+				color-scheme: light dark;
+			}
 
-            body {
-                color: white;
-                display: flex;
-                flex-direction: column;
-                min-height: 100vh;
-                overscroll-behavior: none;
-            }
-            p {
-                font-family: electrolize;
-            }
+			html {
+				scroll-behavior: smooth;
+				backface-visibility: hidden;
+				-webkit-backface-visibility: hidden;
+			}
 
-            @media (prefers-reduced-motion: reduce) {
-                html {
-                    scroll-behavior: auto;
-                }
-            }
+			body {
+				color: white;
+				display: flex;
+				flex-direction: column;
+				min-height: 100vh;
+				overscroll-behavior: none;
+			}
+			p {
+				font-family: electrolize;
+			}
 
-            @media (prefers-color-scheme: dark) {
-                body {
-                    color: rgba(255, 255, 255, 0.9);
-                }
-            }
+			@media (prefers-reduced-motion: reduce) {
+				html {
+					scroll-behavior: auto;
+				}
+			}
 
-            /* #header-nav {
+			@media (prefers-color-scheme: dark) {
+				body {
+					color: rgba(255, 255, 255, 0.9);
+				}
+			}
+
+			/* #header-nav {
                 animation: blur linear both 0.5s;
                 animation-timeline: scroll();
                 animation-range: 0 500px;
@@ -127,41 +123,42 @@ const { title } = Astro.props
                     }
                 }
             } */
-        </style>
+		</style>
 
-        <script type="text/javascript"
-            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-        </script>
-        <script type="text/javascript">
-            (
-                function(){
-                    emailjs.init({
-                    publicKey: "BJ70TUah7Mk4z3PMg",
-                });
-            })();
-        </script>
-    </body>
+		<script
+			type="text/javascript"
+			src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+		></script>
+
+		<script type="text/javascript">
+			;(function () {
+				emailjs.init({
+					publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY,
+				})
+			})()
+		</script>
+	</body>
 </html>
 
 <script>
-    const header = document.getElementById('header')
-    document.addEventListener('scroll', (event: Event) => {
-        if (window.scrollY > 10) {
-            header?.classList.add(
-                'bg-[#010203]',
-                'shadow-lg',
-                'shadow-gray-500',
-                'h-24'
-            )
-            header?.classList.remove('h-28')
-        } else {
-            header?.classList.add('h-28')
-            header?.classList.remove(
-                'bg-[#010203]',
-                'shadow-lg',
-                'shadow-gray-500',
-                'h-24'
-            )
-        }
-    })
+	const header = document.getElementById('header')
+	document.addEventListener('scroll', (event: Event) => {
+		if (window.scrollY > 10) {
+			header?.classList.add(
+				'bg-[#010203]',
+				'shadow-lg',
+				'shadow-gray-500',
+				'h-24'
+			)
+			header?.classList.remove('h-28')
+		} else {
+			header?.classList.add('h-28')
+			header?.classList.remove(
+				'bg-[#010203]',
+				'shadow-lg',
+				'shadow-gray-500',
+				'h-24'
+			)
+		}
+	})
 </script>

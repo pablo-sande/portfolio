@@ -50,13 +50,20 @@ export const MobileHeader = () => {
                         Menu
                     </Dialog.Title>
 
-                    <div className="flex flex-col items-center justify-center space-3">
+                    <nav className="flex flex-col items-center justify-center space-3">
                         <a
-                            href="#about"
+                            href="/#about"
                             className="text-white text-xl mt-6"
                             onClick={() => setIsOpen(false)}
                         >
                             About Me
+                        </a>
+                        <a
+                            href="/#experience"
+                            className="text-white text-xl mt-6"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Experience
                         </a>
                         <a
                             href="/skills"
@@ -65,9 +72,13 @@ export const MobileHeader = () => {
                         >
                             Skills
                         </a>
-                        <a href="/site" className="text-white text-xl mt-6"
-                        onClick={() => setIsOpen(false)}
-            >About this site</a>
+                        {/* <a 
+                            href="/site"
+                            className="text-white text-xl mt-6"
+                            onClick={() => setIsOpen(false)}
+                        >
+                            About this site
+                        </a> */}
                         <a
                             href="/contact"
                             className="text-white text-xl mt-6"
@@ -76,13 +87,14 @@ export const MobileHeader = () => {
                             Contact
                         </a>
                         <a
-                            href="/cv"
+                            href="cv.pdf"
                             className="text-white text-xl mt-6"
                             onClick={() => setIsOpen(false)}
+                            download="PabloSande2024"
                         >
                             Download CV
                         </a>
-                    </div>
+                    </nav>
                 </Dialog.Panel>
             </Dialog>
         </>

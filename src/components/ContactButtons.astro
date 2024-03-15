@@ -1,0 +1,33 @@
+---
+import Badge from './Badge.astro'
+interface Props {
+	customBadgeClass: string
+}
+const { customBadgeClass } = Astro.props
+---
+
+<ul class="flex flex-row w-full items-center justify-center">
+	<a href="https://linkedin.com/in/pablo-sande-0024857b">
+		<li class="relative">
+			<Badge
+				iconType="path"
+				icon="linkedin"
+				title="Linkedin"
+				customClass={customBadgeClass}
+				large={true}
+			/>
+		</li>
+	</a>
+
+	<a href="cv.pdf" download="PabloSande2024">
+		<li class="relative">
+			<Badge
+				iconType="path"
+				icon="cv"
+				title="Download CV"
+				customClass={customBadgeClass}
+				large={true}
+			/>
+		</li>
+	</a>
+</ul>

@@ -3,9 +3,10 @@ import Section from './Section.astro'
 import Badge from './Badge.astro'
 import client from '../lib/apollo-client'
 import graph from 'graphql-tag'
+import ImageComponent from './ImageComponent.astro'
 
 const { data, loading } = await client.query({
-    query: graph`
+	query: graph`
         query SkillLevels {
             skills {
                 title,
@@ -16,120 +17,121 @@ const { data, loading } = await client.query({
 })
 
 type TechnologyItem = {
-    title: string
-    thumbnail: string
+	title: string
+	thumbnail: string
 }
 
 const technologyItem: Array<TechnologyItem> = data.skills
 
 const PROJECTS = [
-    {
-        name: 'Betonline',
-        title: 'Website optimization',
-        position: 'Solutions Architect',
-        description:
-            "This site has insane traffic and that requires an <span class='text-softcyan'>excellent performance</span> optimization and <span class='text-softcyan'>100% uptime</span>. To achive this, as a <span class='text-softcyan'>Solutions Architect</span>, I do Chaos Engineering, Dev Teams mentoring, metrics tracking, architecture and performance improvements, Give support to Engineering Teams by reviewing their code and helping them with decission making... ",
-        technologies: [
-            'React',
-            'Svelte',
-            'Astro',
-            'Typescript',
-            'Docker',
-            'Kubernetes',
-            'NextJS',
-        ],
-        image: 'betonline.png',
-        link: 'https://betonline.ag',
-    },
-    {
-        name: 'DaVitri',
-        title: 'Embeded Software with custom Interface',
-        position: 'Software Engineer/Team Lead',
-        description:
-            "<span class='text-softcyan'>Leading the Frontend Team</span>, I built the <span class='text-softcyan'>low-level interface</span> using Chromium, enabling communication with the hardware's physical actions. Additionally, I developed a React Single Page Application (SPA) that served as the user interface. The hardware was <span class='text-softcyan'>connected to AWS</span> and could trigger remote software updates. I also ensured that the system met all the <span class='text-softcyan'>robustness, fail-proof, and security checks</span> required in the healthcare industry.",
-        technologies: [
-            'React',
-            'Chromium',
-            'NodeJS',
-            'Javascript',
-            'AWS',
-            'Tailwind',
-        ],
-        image: 'davitri.png',
-        link: 'https://overture.life/davitri',
-    },
-    {
-        name: 'Orange',
-        title: 'Full website refactor',
-        position: 'Frontend Architect',
-        description:
-            "As part of the <span class='text-softcyan'>Architecture Core Team</span>, my job consisted on orchestating the <span class='text-softcyan'>hole refactoring</span> of the main website. Among others, I helped to define and create the global architecture, CI/CD, style guides, performance metrics, scaffolding tools and lead technical improvement plans.",
-        technologies: [
-            'Angular',
-            'Typescript',
-            'Docker',
-            'Kubernetes',
-            'NodeJS',
-        ],
-        image: 'orange.png',
-        link: 'https://www.orange.es',
-    },
-    {
-        name: 'Bixby',
-        title: 'Version 2 development',
-        position: 'Software Engineer/Technical Lead',
-        description:
-            "The version 2 was developed from scratch in order to compete with the leaeding Voice Assistants in the industry. Working as a <span class='text-softcyan'>Tech Lead</span>, I was responsible for <span class='text-softcyan'>leading the technical roadmap</span> for the Spanish team version of Bixby v2. One of the biggest challenges was to <span class='text-softcyan'>integrate with several service providers</span>, most of them requiring a specific integration layer",
-        technologies: ['Javascript', 'Java', 'NodeJS'],
-        image: 'bixby.png',
-        link: 'https://www.samsung.com/us/apps/bixby/',
-    },
+	{
+		name: 'Betonline',
+		title: 'Website optimization',
+		position: 'Solutions Architect',
+		description:
+			"This site has insane traffic and that requires an <span class='text-softcyan'>excellent performance</span> optimization and <span class='text-softcyan'>100% uptime</span>. To achive this, as a <span class='text-softcyan'>Solutions Architect</span>, I do Chaos Engineering, Dev Teams mentoring, metrics tracking, architecture and performance improvements, Give support to Engineering Teams by reviewing their code and helping them with decission making... ",
+		technologies: [
+			'React',
+			'Svelte',
+			'NextJS',
+			'Astro',
+			'Typescript',
+			'Docker',
+			'Kubernetes',
+		],
+		imagePath: '/src/assets/betonline.png',
+		link: 'https://betonline.ag',
+	},
+	{
+		name: 'DaVitri',
+		title: 'Embeded Software with custom Interface',
+		position: 'Software Engineer/Team Lead',
+		description:
+			"<span class='text-softcyan'>Leading the Frontend Team</span>, I built the <span class='text-softcyan'>low-level interface</span> using Chromium, enabling communication with the hardware's physical actions. Additionally, I developed a React Single Page Application (SPA) that served as the user interface. The hardware was <span class='text-softcyan'>connected to AWS</span> and could trigger remote software updates. I also ensured that the system met all the <span class='text-softcyan'>robustness, fail-proof, and security checks</span> required in the healthcare industry.",
+		technologies: [
+			'React',
+			'Chromium',
+			'NodeJS',
+			'Javascript',
+			'AWS',
+			'Tailwind',
+		],
+		imagePath: '/src/assets/davitri.png',
+		link: 'https://overture.life/davitri',
+	},
+	{
+		name: 'Orange',
+		title: 'Full website refactor',
+		position: 'Frontend Architect',
+		description:
+			"As part of the <span class='text-softcyan'>Architecture Core Team</span>, my job consisted on orchestating the <span class='text-softcyan'>hole refactoring</span> of the main website. Among others, I helped to define and create the global architecture, CI/CD, style guides, performance metrics, scaffolding tools and lead technical improvement plans.",
+		technologies: [
+			'Angular',
+			'Typescript',
+			'Docker',
+			'Kubernetes',
+			'NodeJS',
+			'React',
+		],
+		imagePath: '/src/assets/orange.png',
+		link: 'https://www.orange.es',
+	},
+	{
+		name: 'Bixby',
+		title: 'Version 2 development',
+		position: 'Software Engineer/Technical Lead',
+		description:
+			"The version 2 was developed from scratch in order to compete with the leaeding Voice Assistants in the industry. Working as a <span class='text-softcyan'>Tech Lead</span>, I was responsible for <span class='text-softcyan'>leading the technical roadmap</span> for the Spanish team version of Bixby v2. One of the biggest challenges was to <span class='text-softcyan'>integrate with several service providers</span>, most of them requiring a specific integration layer",
+		technologies: ['Javascript', 'Java', 'NodeJS'],
+		imagePath: '/src/assets/bixby.png',
+		link: 'https://www.samsung.com/us/apps/bixby/',
+	},
 ]
 
 const getTechnologyIcon = (technology: string) =>
-    technologyItem.find(
-        (item: TechnologyItem) =>
-            item.title.toLowerCase() === technology.toLowerCase()
-    )?.thumbnail || ''
+	technologyItem.find(
+		(item: TechnologyItem) =>
+			item.title.toLowerCase() === technology.toLowerCase()
+	)?.thumbnail || ''
 ---
 
 <Section
-    idName="experience"
-    wrapperClass="bg-darkblue"
-    title="Experience Highlights"
+	idName="experience"
+	wrapperClass="bg-darkblue"
+	title="Experience Highlights"
 >
-    {
-        PROJECTS.map((project) => (
-            <article class="flex flex-col justify-center w-full h-full sm:max-w-xl lg:max-w-3xl py-12 group">
-                <h3 class="text-3xl text-bold pb-4 text-softcyan">
-                    {project.name}
-                </h3>
-                <p class="text-xl pb-4">{project.title}</p>
-                <div id="project-description" class="inline">
-                    <Fragment set:html={project.description} />
-                </div>
-                <ul class="flex flex-row flex-wrap pt-4">
-                    {project.technologies.map((technology) => (
-                        <li class="relative flex">
-                            <Badge
-                                icon={getTechnologyIcon(technology)}
-                                title={technology}
-                                iconType="html"
-                            />
-                        </li>
-                    ))}
-                </ul>
-                <a class="mt-8" href={project.link}>
-                    <div class="transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
-                        <img
-                            src={project.image}
-                            loading="lazy"
-                            alt=""
-                            class="md:scale-105 md:group-hover:scale-100 object-cover transition duration-500 flex relative justify-center h-64 sm:h-128 w-full rounded-lg shadow-xl shadow-white/10"
-                        />
-                    </div>
-                </a>
-            </article>
-        ))
-    }
+	{
+		PROJECTS.map((project) => (
+			<article class="flex flex-col justify-center w-full h-full sm:max-w-xl lg:max-w-3xl py-12 group">
+				<h3 class="text-3xl text-bold pb-4 text-softcyan">
+					{project.name}
+				</h3>
+				<p class="text-xl pb-4">{project.title}</p>
+				<div id="project-description" class="inline">
+					<Fragment set:html={project.description} />
+				</div>
+				<ul class="flex flex-row flex-wrap pt-4">
+					{project.technologies.map((technology) => (
+						<li class="relative flex">
+							<Badge
+								icon={getTechnologyIcon(technology)}
+								title={technology}
+								iconType="html"
+								customClass="bg-lightgray text-black"
+							/>
+						</li>
+					))}
+				</ul>
+				<a class="mt-8" href={project.link}>
+					<div class="transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+						<ImageComponent
+							imagePath={project.imagePath}
+							altText={project.name}
+							customClass="md:scale-105 md:group-hover:scale-100 object-cover transition duration-500 flex relative justify-center h-64 sm:h-128 w-full rounded-lg shadow-xl shadow-white/10"
+						/>
+					</div>
+				</a>
+			</article>
+		))
+	}
 </Section>

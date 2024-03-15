@@ -3,15 +3,9 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import emailjs from '@emailjs/browser'
 import { useState } from 'react'
+import type { FormFields, FormKeys } from '../data/types'
 
-type Fields = {
-    name: string,
-    email: string,
-    subject: string,
-    message: string,
-}
-
-type ErrorMessage = {
+type FormErrorMessage = {
     error?: FieldError;
 }
 
@@ -21,9 +15,14 @@ const schema = yup.object({
     subject: yup.string().required("Please enter a subject"),
     message: yup.string().required("Please drop a message!")
 })
-const ErrorMessage = ({error}: ErrorMessage) => <div className="text-red-500">{error?.message}</div>
+const ErrorMessage = ({error}: FormErrorMessage) => <div className="text-red-500">{error?.message}</div>
 
-export const ContactForm = () => {
+interface ContactFormProps {
+    formKeys: FormKeys
+}
+
+export const ContactForm = (props: ContactFormProps) => {
+    const formKeys: FormKeys = props.formKeys;
     const [statusMessage, setStatusMessage] = useState('');
     const [statusMessageClass, setStatusMessageClass] = useState('text-powercyan');
     const [isLoading, setIsLoading] = useState(false);
@@ -32,20 +31,19 @@ export const ContactForm = () => {
         handleSubmit, 
         formState: { errors },
         reset
-    } = useForm<Fields>({
+    } = useForm<FormFields>({
         resolver: yupResolver(schema)
     });
     
-    const submitForm = async (formValues: Fields) => {
-        console.log("import.meta.env ", import.meta.env, 'import.meta.env.key --> ', import.meta.env.PUBLIC_EMAILJS_SERVICE_ID)
+    const submitForm = async (formValues: FormFields) => {
         try {
-            // setIsLoading(true);
-            // await emailjs.send(
-            //     import.meta.env.PUBLIC_EMAILJS_SERVICE_ID, 
-            //     import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID, 
-            //     formValues,  
-            //     import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY
-            // )
+            setIsLoading(true);
+            await emailjs.send(
+                formKeys.serviceId, 
+                formKeys.templateId, 
+                formValues,  
+                formKeys.publicKey
+            )
             reset()
             setStatusMessage("Thanks for your message :)")
             setStatusMessageClass('text-green-400')
@@ -64,8 +62,8 @@ export const ContactForm = () => {
                 statusMessage && <div id="status-msg" className={`pb-2 ${statusMessageClass}`}>{statusMessage}</div>
             }
             <div className='grid grid-cols-2 gap-2'>
-                <input type="text" className="bg-lightgray rounded-md" placeholder="Name" {...register("name")}/>
-                <input type="email" className="bg-lightgray rounded-md" placeholder="E-mail" {...register("email")}/>
+                <input type="text" className="bg-lightgray rounded-md focus-visible:ring-powercyan" placeholder="Name" {...register("name")}/>
+                <input type="email" className="bg-lightgray rounded-md focus-visible:ring-powercyan" placeholder="E-mail" {...register("email")}/>
                 <div className="px-2">
                     {
                         errors.name && <ErrorMessage error={errors.name}/>
@@ -79,9 +77,10 @@ export const ContactForm = () => {
             </div>
 
             <input 
-                type="subject" 
+                type="text" 
                 placeholder="Subject" 
-                className="bg-lightgray mt-2 p-2 px-3 rounded-md" {...register("subject")}
+                className="bg-lightgray mt-2 p-2 px-3 rounded-md focus-visible:ring-powercyan" 
+                {...register("subject")}
             />
 
             <div className="p-2">
@@ -94,7 +93,7 @@ export const ContactForm = () => {
                 id="message" 
                 cols={30} 
                 rows={10}
-                className="bg-lightgray rounded-md"
+                className="bg-lightgray rounded-md focus-visible:ring-powercyan"
                 {...register("message")}
             >
             </textarea>
@@ -109,7 +108,7 @@ export const ContactForm = () => {
                 ! isLoading && (
                     <button 
                         type="submit"
-                        className="text-softcyan bg-bluegray mt-2 rounded-3xl p-4 focus:ring-2 focus:ring-blue-400 active:ring-2 active:ring-blue-400 w-auto m-auto min-w-40"
+                        className="text-softcyan bg-bluegray mt-2 rounded-3xl p-4 focus-visible:ring-powercyan w-auto m-auto min-w-40"
                     >
                         Send
                     </button>

@@ -1,72 +1,78 @@
 ---
 import Section from '../components/Section.astro'
 import Badge from './Badge.astro'
+import ContactButtons from './ContactButtons.astro'
 const INTERESTS = [
-    'Cats',
-    'Space',
-    'Coffee',
-    'Gaming',
-    'Quantum',
-    'Motorbikes',
-    'Coding',
+	'Cats',
+	'Motorbikes',
+	'Space',
+	'Coffee',
+	'Gaming',
+	'Quantum',
+	'Coding',
 ]
 ---
 
 <Section title="About me" wrapperClass="bg-[#181818]" idName="about">
-    <article class="pt-12 text-lg">
-        <div>
-            <p>
-                I'm Pablo, a Software Engineer with <span class="text-softcyan"
-                    >10 years of experience</span
-                > based in Madrid (Spain).
-            </p>
+	<article class="pt-12 text-lg">
+		<div class="pb-6">
+			<p>
+				I'm Pablo, a Software Engineer with <span class="text-softcyan"
+					>10 years of experience</span
+				> based in Madrid (Spain).
+			</p>
 
-            <p class="pt-8">
-                Over the years <span class="text-softcyan"
-                    >I have worked for many different companies</span
-                >, from startups to multinationals, for different industrial
-                areas.
-            </p>
+			<p class="pt-8">
+				Over the years <span class="text-softcyan"
+					>I have worked for many different companies</span
+				>, from startups to multinationals, for different industrial
+				areas.
+			</p>
 
-            <p class="pt-8">
-                I love to develop code and teams that create solutions through
-                <span class="text-softcyan">technical excellence</span>.
-                Mastering the art of making trade-offs between cost and benefit,
-                I always put <span class="text-softcyan"
-                    >quality over quantity, delivery over promises.</span
-                >
-            </p>
+			<p class="pt-8">
+				I love to develop code and teams that create solutions through
+				<span class="text-softcyan">technical excellence</span>.
+				Mastering the art of making trade-offs between cost and benefit,
+				I always put <span class="text-softcyan"
+					>quality over quantity, delivery over promises.</span
+				>
+			</p>
 
-            <p class="pt-8">
-                I have <span class="text-softcyan">extensive experience</span> working
-                in <span class="text-softcyan">Agile</span> environments, giving
-                <span class="text-softcyan">mentorship</span> and <span
-                    class="text-softcyan">training</span
-                > other developers.
-            </p>
+			<p class="pt-8">
+				I have <span class="text-softcyan">extensive experience</span> working
+				in <span class="text-softcyan">Agile</span> environments, giving
+				<span class="text-softcyan">mentorship</span> and <span
+					class="text-softcyan">training</span
+				> other developers.
+			</p>
 
-            <p class="pt-8">
-                I make sure to always<span class="text-softcyan">
-                    maintain a healthy communication
-                </span>between the product/stakeholders and the development side
-                in orther to have a constant delivery/review/validation process.
-            </p>
-        </div>
+			<p class="pt-8">
+				I make sure to always<span class="text-softcyan">
+					maintain a healthy communication
+				</span>between the product/stakeholders and the development side
+				in orther to have a constant delivery/review/validation process.
+			</p>
+		</div>
 
-        <h3 class="text-2xl pt-8">My Interests</h3>
+		<ContactButtons
+			customBadgeClass="p-2 bg-bluegray text-lightgray [&>svg]:fill-lightgray"
+		/>
 
-        <ul class="pt-4 flex flex-wrap w-full">
-            {
-                INTERESTS.map((interest) => (
-                    <li class="relative">
-                        <Badge
-                            iconType="path"
-                            icon={interest.toLowerCase() + '.svg'}
-                            title={interest}
-                        />
-                    </li>
-                ))
-            }
-        </ul>
-    </article>
+		<h3 class="text-2xl pt-8 text-softcyan">My Interests</h3>
+
+		<ul class="pt-4 flex flex-wrap w-full">
+			{
+				INTERESTS.map((interest) => (
+					<li class="relative">
+						<Badge
+							iconType="path"
+							icon={interest.toLowerCase()}
+							title={interest}
+							customClass="bg-lightgray text-black"
+						/>
+					</li>
+				))
+			}
+		</ul>
+	</article>
 </Section>

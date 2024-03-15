@@ -1,250 +1,248 @@
+---
+import ImageComponent from './ImageComponent.astro'
+---
+
 <section
-    id="main-section"
-    class=`
+	id="main-section"
+	class=`
             overflow-x-hidden overflow-y-auto
             flex flex-col items-center max-w-screen h-section p-5 z-200
         `
 >
-    <div class="flex relative justify-center items-center w-full h-96">
-        <div class="ellipse ellipse-out">
-            <div class="electron"></div>
-        </div>
+	<div
+		class="block relative w-full min-h-72 sm:min-h-96 max-h-72 md:max-h-96"
+	>
+		<div class="ellipse ellipse-out">
+			<div class="electron"></div>
+		</div>
 
-        <div class="ellipse ellipse-out">
-            <div class="electron"></div>
-        </div>
+		<div class="ellipse ellipse-out">
+			<div class="electron"></div>
+		</div>
 
-        <div class="ellipse pablo-ellipse">
-            <img
-                src="/pablo.png"
-                alt="Pablo Sande"
-                class=`
-                    pablo max-w-72 max-h-72 md:max-w-96 md:max-h-96 
-                    rounded-full shadow-[0_0_10px_5px] shadow-gray-500"
-                `
-            />
-        </div>
-    </div>
+		<div class="ellipse pablo-ellipse">
+			<div
+				class="pablo max-w-72 max-h-72 md:max-w-96 md:max-h-96 rounded-full shadow-[0_0_10px_5px] shadow-gray-500"
+			>
+				<ImageComponent
+					imagePath="/src/assets/pablo.png"
+					altText="Pablo Sande"
+					customClass="rounded-full"
+				/>
+			</div>
+		</div>
+	</div>
 
-    <div class="flex">
-        <h1
-            class="show-up text-4xl xs:text-5xl sm:text-6xl font-bold text-center md:pt-12 text-softcyan"
-        >
-            Frontend
-        </h1>
-    </div>
-    <div class="flex">
-        <h1
-            class="show-up text-4xl xs:text-5xl sm:text-6xl font-bold text-center pt-4 sm:pb-12"
-        >
-            Architect
-        </h1>
-    </div>
+	<div class="flex">
+		<h1
+			class="show-up text-4xl xs:text-5xl sm:text-6xl font-bold text-center pt-6 md:pt-12 text-softcyan"
+		>
+			Frontend
+		</h1>
+	</div>
+	<div class="flex">
+		<h1
+			class="show-up text-4xl xs:text-5xl sm:text-6xl font-bold text-center pt-4 sm:pb-12"
+		>
+			Architect
+		</h1>
+	</div>
 
-    <a
-        href="#experience"
-        class="rounded-3xl bg-bluegray relative flex p-4 mt-6 show-up"
-        >View my Work</a
-    >
+	<a
+		href="#experience"
+		class="rounded-3xl bg-bluegray relative flex p-4 mt-6 show-up"
+		>View my Work</a
+	>
 </section>
 
 <style lang="scss">
-    $ellipse: 120px;
-    $electron: calc($ellipse/15);
-    $animationChain: 4.5;
+	$ellipse: 120px;
+	$electron: calc($ellipse/15);
+	$animationChain: 4.5;
 
-    #main-section {
-        -webkit-transform: translate3d(0, 0, 0);
-        -webkit-perspective: 1000;
-    }
+	#main-section {
+		-webkit-transform: translate3d(0, 0, 0);
+		-webkit-perspective: 1000;
+	}
 
-    @mixin atom($mod) {
-        width: $mod * 2;
-        height: $mod * 2;
-        border-radius: 50%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-        position: absolute;
-    }
+	@mixin atom($mod) {
+		width: $mod * 2;
+		height: $mod * 2;
+		border-radius: 50%;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+		position: absolute;
+	}
 
-    .ellipse {
-        @include atom($ellipse);
-        border: 4px #555 solid;
-        transform-style: preserve-3d;
-        -webkit-transform-style: preserve-3d;
-        .electron {
-            @include atom($electron);
-            background: deepskyblue;
-            animation:
-                move linear infinite,
-                ellipseout 1s linear 2s forwards;
-        }
-        @for $i from 1 through 2 {
-            &:nth-child(#{$i}) {
-                transform: rotateZ($i * 2 * 30deg) rotateY(70deg);
-                .electron {
-                    animation-duration: $i + 0.25 + s;
-                }
-            }
-        }
-    }
+	.ellipse {
+		@include atom($ellipse);
+		border: 4px #555 solid;
+		transform-style: preserve-3d;
+		-webkit-transform-style: preserve-3d;
+		.electron {
+			@include atom($electron);
+			background: deepskyblue;
+			animation:
+				move linear infinite,
+				ellipseout 1s linear 2s forwards;
+		}
+		@for $i from 1 through 2 {
+			&:nth-child(#{$i}) {
+				transform: rotateZ($i * 2 * 30deg) rotateY(70deg);
+				.electron {
+					animation-duration: $i + 0.25 + s;
+				}
+			}
+		}
+	}
 
-    @keyframes pabloellipseout {
-        from {
-            border: 4px solid #555;
-        }
-        to {
-            border: 4px solid transparent;
-        }
-    }
+	@keyframes pabloellipseout {
+		from {
+			border: 4px solid #555;
+		}
+		to {
+			border: 4px solid transparent;
+		}
+	}
 
-    @keyframes move {
-        from {
-            transform: rotateZ(0) translateX($ellipse) rotateZ(0)
-                rotateY(-70deg);
-            -webkit-transform: rotateZ(0) translateX($ellipse) rotateZ(0)
-                rotateY(-70deg);
-        }
-        to {
-            transform: rotateZ(360deg) translateX($ellipse) rotateZ(-360deg)
-                rotateY(-70deg);
-            -webkit-transform: rotateZ(360deg) translateX($ellipse)
-                rotateZ(-360deg) rotateY(-70deg);
-        }
-    }
+	@keyframes move {
+		from {
+			transform: rotateZ(0) translateX($ellipse) rotateZ(0)
+				rotateY(-70deg);
+			-webkit-transform: rotateZ(0) translateX($ellipse) rotateZ(0)
+				rotateY(-70deg);
+		}
+		to {
+			transform: rotateZ(360deg) translateX($ellipse) rotateZ(-360deg)
+				rotateY(-70deg);
+			-webkit-transform: rotateZ(360deg) translateX($ellipse)
+				rotateZ(-360deg) rotateY(-70deg);
+		}
+	}
 
-    @keyframes stop {
-        0% {
-            // transform: rotateZ(360deg) translateX($ellipse) rotateY(-70deg);
-            transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
-            -webkit-transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
-        }
-        // 1% {
-        //     transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
-        // }
-        100% {
-            transform: rotateZ(180deg) translateX(0) rotateY(70deg);
-            -webkit-transform: rotateZ(180deg) translateX(0) rotateY(70deg);
-        }
-    }
+	@keyframes stop {
+		0% {
+			transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
+			-webkit-transform: rotateZ(180deg) translateX(-80px) rotateY(70deg);
+		}
+		100% {
+			transform: rotateZ(180deg) translateX(0) rotateY(70deg);
+			-webkit-transform: rotateZ(180deg) translateX(0) rotateY(70deg);
+		}
+	}
 
-    .pablo-ellipse {
-        transform: rotateZ(6 * 30deg) rotateY(70deg);
-        -webkit-transform: rotateZ(6 * 30deg) rotateY(70deg);
-        animation:
-            normalsize 0s ease-in 4s forwards,
-            pabloellipseout 2s linear 2s forwards;
-    }
+	.pablo-ellipse {
+		transform: rotateZ(6 * 30deg) rotateY(70deg);
+		-webkit-transform: rotateZ(6 * 30deg) rotateY(70deg);
+		animation:
+			normalsize 0s ease-in 4s forwards,
+			pabloellipseout 2s linear 2s forwards;
+	}
 
-    @keyframes normalposition {
-        from {
-        }
-        to {
-            transform: rotateY(290deg) rotateZ(180deg);
-            -webkit-transform: rotateY(290deg) rotateZ(180deg);
-        }
-    }
+	@keyframes normalposition {
+		from {
+		}
+		to {
+			transform: rotateY(290deg) rotateZ(180deg);
+			-webkit-transform: rotateY(290deg) rotateZ(180deg);
+		}
+	}
 
-    @keyframes normalsize {
-        0% {
-            width: $ellipse;
-            height: $ellipse;
-        }
-        to {
-            width: 100%;
-            height: 24rem;
-        }
-    }
+	@keyframes normalsize {
+		0% {
+			width: $ellipse;
+			height: $ellipse;
+		}
+		to {
+			width: 100%;
+			height: 24rem;
+		}
+	}
 
-    .pablo {
-        @include atom($electron);
-        width: 0;
-        height: 0;
-        // transform: rotateZ(0) translateX(0) rotateZ(0) rotateY(0);
-        animation:
-            move $animationChain + s ease-out,
-            normalposition 0s linear $animationChain + s forwards,
-            stop 0.5s linear $animationChain + s forwards,
-            sizein 1s ease-in $animationChain + 0.5s forwards,
-            float 6s linear infinite $animationChain + 2s;
-    }
+	.pablo {
+		@include atom($electron);
+		width: 0;
+		height: 0;
+		animation:
+			move $animationChain + s ease-out,
+			normalposition 0s linear $animationChain + s forwards,
+			stop 0.5s linear $animationChain + s forwards,
+			sizein 1s ease-in $animationChain + 0.5s forwards,
+			float 6s linear infinite $animationChain + 2s;
+	}
 
-    @keyframes sizein {
-        from {
-            width: 0;
-            height: 0;
-        }
-        to {
-            width: 24rem;
-            height: 24rem;
-        }
-    }
+	@keyframes sizein {
+		from {
+			width: 0;
+			height: 0;
+		}
+		to {
+			width: 24rem;
+			height: 24rem;
+		}
+	}
 
-    .show-up {
-        opacity: 0;
-        animation: showup 1s linear 0.5s forwards;
-    }
+	.show-up {
+		opacity: 0;
+		animation: showup 1s linear 0.5s forwards;
+	}
 
-    @keyframes showup {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
+	@keyframes showup {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
 
-    .ellipse-out {
-        animation: ellipseout 1s linear 3s forwards;
-    }
+	.ellipse-out {
+		animation: ellipseout 1s linear 3s forwards;
+	}
 
-    @keyframes ellipseout {
-        from {
-            border: 4px solid #555;
-        }
-        to {
-            background: transparent;
-            border: 4px solid transparent;
-        }
-    }
+	@keyframes ellipseout {
+		from {
+			border: 4px solid #555;
+		}
+		to {
+			background: transparent;
+			border: 4px solid transparent;
+		}
+	}
 
-    .floating {
-        animation: float 6s linear 2.5s infinite;
-    }
-
-    @keyframes float {
-        0% {
-            transform: rotateZ(180deg) translateX(0) translateY(0)
-                rotateY(70deg);
-            -webkit-transform: rotateZ(180deg) translateX(0) translateY(0)
-                rotateY(70deg);
-        }
-        25% {
-            transform: rotateZ(180deg) translateX(0) translateY(-4px)
-                rotateY(70deg);
-            -webkit-transform: rotateZ(180deg) translateX(0) translateY(-4px)
-                rotateY(70deg);
-        }
-        50% {
-            transform: rotateZ(180deg) translateX(-4px) translateY(-6px)
-                rotateY(70deg);
-            -webkit-transform: rotateZ(180deg) translateX(-4px) translateY(-6px)
-                rotateY(70deg);
-        }
-        75% {
-            transform: rotateZ(180deg) translateX(1px) translateY(-7px)
-                rotateY(70deg);
-            -webkit-transform: rotateZ(180deg) translateX(1px) translateY(-7px)
-                rotateY(70deg);
-        }
-        100% {
-            transform: rotateZ(180deg) translateX(0) translateY(0)
-                rotateY(70deg);
-            -webkit-transform: rotateZ(180deg) translateX(0) translateY(0)
-                rotateY(70deg);
-        }
-    }
+	@keyframes float {
+		0% {
+			transform: rotateZ(180deg) translateX(0) translateY(0)
+				rotateY(70deg);
+			-webkit-transform: rotateZ(180deg) translateX(0) translateY(0)
+				rotateY(70deg);
+		}
+		25% {
+			transform: rotateZ(180deg) translateX(0) translateY(-4px)
+				rotateY(70deg);
+			-webkit-transform: rotateZ(180deg) translateX(0) translateY(-4px)
+				rotateY(70deg);
+		}
+		50% {
+			transform: rotateZ(180deg) translateX(-4px) translateY(-6px)
+				rotateY(70deg);
+			-webkit-transform: rotateZ(180deg) translateX(-4px) translateY(-6px)
+				rotateY(70deg);
+		}
+		75% {
+			transform: rotateZ(180deg) translateX(1px) translateY(-7px)
+				rotateY(70deg);
+			-webkit-transform: rotateZ(180deg) translateX(1px) translateY(-7px)
+				rotateY(70deg);
+		}
+		100% {
+			transform: rotateZ(180deg) translateX(0) translateY(0)
+				rotateY(70deg);
+			-webkit-transform: rotateZ(180deg) translateX(0) translateY(0)
+				rotateY(70deg);
+		}
+	}
 </style>

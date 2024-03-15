@@ -1,6 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro'
 import { ContactForm } from '../components/ContactForm'
+import ContactButtons from '../components/ContactButtons.astro'
+import type { FormKeys } from '../data/types'
+
+const formKeys: FormKeys = {
+	serviceId: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+	templateId: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+	publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY,
+}
 ---
 
 <Layout title="Contact Me">
@@ -9,6 +17,8 @@ import { ContactForm } from '../components/ContactForm'
 			Contact me!
 		</h1>
 
-		<ContactForm client:visible />
+		<ContactForm client:visible formKeys={formKeys} />
+
+		<ContactButtons customBadgeClass="p-2 bg-lightgray text-black" />
 	</article>
 </Layout>
