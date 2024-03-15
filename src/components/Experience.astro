@@ -39,7 +39,7 @@ const PROJECTS = [
 			'Docker',
 			'Kubernetes',
 		],
-		imagePath: 'betonline.png',
+		imageName: 'betonline',
 		link: 'https://betonline.ag',
 	},
 	{
@@ -56,7 +56,7 @@ const PROJECTS = [
 			'AWS',
 			'Tailwind',
 		],
-		imagePath: 'davitri.png',
+		imageName: 'davitri',
 		link: 'https://overture.life/davitri',
 	},
 	{
@@ -73,7 +73,7 @@ const PROJECTS = [
 			'NodeJS',
 			'React',
 		],
-		imagePath: 'orange.png',
+		imageName: 'orange',
 		link: 'https://www.orange.es',
 	},
 	{
@@ -83,7 +83,7 @@ const PROJECTS = [
 		description:
 			"The version 2 was developed from scratch in order to compete with the leaeding Voice Assistants in the industry. Working as a <span class='text-softcyan'>Tech Lead</span>, I was responsible for <span class='text-softcyan'>leading the technical roadmap</span> for the Spanish team version of Bixby v2. One of the biggest challenges was to <span class='text-softcyan'>integrate with several service providers</span>, most of them requiring a specific integration layer",
 		technologies: ['Javascript', 'Java', 'NodeJS'],
-		imagePath: 'bixby.png',
+		imageName: 'bixby',
 		link: 'https://www.samsung.com/us/apps/bixby/',
 	},
 ]
@@ -125,7 +125,7 @@ const getTechnologyIcon = (technology: string) =>
 				<a class="mt-8" href={project.link}>
 					<div class="transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
 						<ImageComponent
-							imagePath={project.imagePath}
+							imagePath={project.imageName}
 							altText={project.name}
 							customClass="md:scale-105 md:group-hover:scale-100 object-cover transition duration-500 flex relative justify-center h-64 sm:h-128 w-full rounded-lg shadow-xl shadow-white/10"
 						/>

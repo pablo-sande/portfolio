@@ -16,10 +16,7 @@ const img = images.find(
 		i.default.src.indexOf(imagePath) !== -1
 )
 
-if (!img)
-	throw new Error(
-		`"${imagePath}" does not exist in glob: "src/assets/*.{jpeg,jpg,png,gif}"`
-	)
+if (!img) throw new Error(`"${imagePath}" does not exist in glob: "./assets/*"`)
 ---
 
 <Image src={img.default} alt={altText} class={customClass} />
