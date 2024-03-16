@@ -2,16 +2,22 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: portfolio
-  annotations: {}
-    #cert-manager.io/issuer: "letsencrypt-staging"
+  annotations:
+    cert-manager.io/issuer: "letsencrypt-prod"
+    kubernetes.io/ingress.class: "nginx"
 spec:
   ingressClassName: nginx
+  defaultBackend:
+    service:
+      name: portfolio
+      port:
+        number: 80
   tls:
   - hosts:
-    - www.pablosande.dev
-    secretName: pablosande-tls
+    - pablosande.dev
+    secretName: letsencrypt-prod
   rules:
-  - host: www.pablosande.dev
+  - host: pablosande.dev
     http:
       paths:
       - path: /
@@ -25,7 +31,7 @@ spec:
 
               # helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.14.4 --set installCRDs=true
 
-
+# helm upgrade ingress-nginx ingress-nginx/ingress-nginx --version <INGRESS_NGINX_STACK_NEW_VERSION> --namespace ingress-nginx --values ingress.yaml
 
 
               # helm install example example_chart --namespace example --create-namespace --set cert-manager.namespace=security
