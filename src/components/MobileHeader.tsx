@@ -8,13 +8,13 @@ export const MobileHeader = () => {
     return (
         <>
             <div 
-                className="box w-8 h-8 text-white z-30" 
+                className="box h-5 w-8 text-white z-30 m-auto" 
                 onClick={() => {
                     setIsOpen(!isOpen); 
                     setIsActive(!isActive);
                 }}
             >
-                <div className={"btn w-8 h-8 " + (isActive ? 'active' : 'not-active')}>
+                <div className={"btn " + (isActive ? 'active' : 'not-active')}>
                     <span className="menu-icon"></span>
                     <span className="menu-icon"></span>
                     <span className="menu-icon"></span>
