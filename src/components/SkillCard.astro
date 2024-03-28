@@ -23,7 +23,7 @@ const animationDuration = (item.skillLevel * MAX_ANIMATION_DURATION) / 100 + 's'
 ---
 
 <div
-	class="p-[12px] rounded-full skillbox spin relative h-[150px] w-[150px] m-auto"
+	class="p-[12px] rounded-full skillbox spin relative h-[150px] w-[150px] m-auto" role="button" tabindex="0"
 >
 	<div
 		class="bg-gray-200 relative rounded-full flex flex-col justify-center items-center w-full h-full"
@@ -31,7 +31,7 @@ const animationDuration = (item.skillLevel * MAX_ANIMATION_DURATION) / 100 + 's'
 		<div class="w-16 h-16">
 			<Fragment set:html={item.thumbnail} />
 		</div>
-		<h2 class="font-bold text-lg text-gray-800 text-center">
+		<h2 class="font-bold text:sm sm:text-lg text-gray-800 text-center">
 			{item.title}
 		</h2>
 	</div>
