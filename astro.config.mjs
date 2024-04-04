@@ -4,6 +4,8 @@ import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 import icon from "astro-icon";
 
+import vercel from "@astrojs/vercel/serverless";
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), react(), icon()],
@@ -12,7 +14,5 @@ export default defineConfig({
     port: 3000,
     host: true
   },
-  adapter: node({
-    mode: 'standalone'
-  })
+  adapter: vercel()
 });
