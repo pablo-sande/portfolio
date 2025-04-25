@@ -21,14 +21,32 @@ type TechnologyItem = {
 }
 
 const technologyItem: Array<TechnologyItem> = data.skills
+	console.log(technologyItem)
 
 const PROJECTS = [
+	{
+		name: 'Ikea Home',
+		title: 'Home Services Marketplace',
+		position: 'Senior Product Engineer / Tech Lead',
+		description: "A marketplace app to offer all kind of home-related services. As the <span class='text-softcyan'>Tech Lead of the platform squad</span>, I was responsible for creating the <span class='text-softcyan'>architecture</span>, <span class='text-softcyan'>infrastructure</span> and <span class='text-softcyan'>cross-product code</span> that powered the entire marketplace.",
+		technologies: [
+			'Flutter',
+			'React',
+			'NextJS',
+			'Go',
+			'GCP',
+			'Docker',
+			'Typescript'
+		],
+		imageName: 'ikea-home.webp',
+		link: 'https://www.ikea.com/es/es/customer-service/services/ikea-home-pubeb1efe60/',
+	},
 	{
 		name: 'Betonline',
 		title: 'Website optimization',
 		position: 'Solutions Architect',
 		description:
-			"This site has insane traffic and that requires an <span class='text-softcyan'>excellent performance</span> optimization and <span class='text-softcyan'>100% uptime</span>. To achieve this, as a <span class='text-softcyan'>Solutions Architect</span>, I do Chaos Engineering, Dev Teams mentoring, metrics tracking, architecture and performance improvements, Give support to Engineering Teams by reviewing their code and helping them with decission making... ",
+			"This site has insane traffic and that requires an <span class='text-softcyan'>excellent performance</span> optimization and <span class='text-softcyan'>100% uptime</span>. To achieve this, as a <span class='text-softcyan'>Solutions Architect</span>, I performed Chaos Engineering, Dev Teams mentoring, metrics tracking, architecture and performance improvements, Give support to Engineering Teams by reviewing their code and helping them with decission making... ",
 		technologies: [
 			'React',
 			'Svelte',
@@ -45,7 +63,7 @@ const PROJECTS = [
 	{
 		name: 'DaVitri',
 		title: 'Embeded Software with custom Interface',
-		position: 'Software Engineer/Team Lead',
+		position: 'Software Engineer / Tech Lead',
 		description:
 			"<span class='text-softcyan'>Leading the Frontend Team</span>, I built the <span class='text-softcyan'>low-level interface</span> using Chromium, enabling communication with the hardware's physical actions. Additionally, I developed a React Single Page Application (SPA) that served as the user interface. The hardware was <span class='text-softcyan'>connected to AWS</span> and could trigger remote software updates. I also ensured that the system met all the <span class='text-softcyan'>robustness, fail-proof, and security checks</span> required in the healthcare industry.",
 		technologies: [
@@ -106,7 +124,8 @@ const getTechnologyIcon = (technology: string) =>
 				<h3 class="text-3xl text-bold pb-4 text-softcyan">
 					{project.name}
 				</h3>
-				<p class="text-xl pb-4">{project.title}</p>
+				<p class="text-xl pb-1">{project.title}</p>
+				<p class="text-lg pb-4 text-powercyan underline">{project.position}</p>
 				<div id="project-description" class="inline">
 					<Fragment set:html={project.description} />
 				</div>

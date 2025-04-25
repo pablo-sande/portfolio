@@ -11,6 +11,7 @@ const { data, loading } = await client.query({
 	query: graph`
         query SkillLevels {
             skills {
+                id,
                 title,
                 thumbnail,
                 skillLevel
@@ -20,6 +21,8 @@ const { data, loading } = await client.query({
 })
 
 const skillCardItems: Array<SkillCardItem> = data.skills
+console.log('Total skills:', skillCardItems.length)
+console.log('Skills data:', skillCardItems)
 ---
 
 <Layout title="Skills">
